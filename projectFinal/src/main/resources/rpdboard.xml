@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rpdboardns">
+	<resultMap type="rpdboard" id="rpdResult">
+		<result property="pbrno" 		    column="pbrno" />
+		<result property="pNumber"	    column="pNumber" />
+		<result property="pbr_writer"	    column="pbr_writer" />
+		<result property="id"		    column="id" />
+		<result property="pbr_content" 	column="pbr_content" />
+		<result property="pbr_regdate" 	column="pbr_regdate" />
+		<result property="pbr_updatedate" column="pbr_updatedate" />
+		<result property="pbr_del" 	    column="pbr_del" />
+	</resultMap>
+	
+	<select id="list" parameterType="integer" resultMap="rpdResult">
+		select * from PBreplyBoard where pNumber=#{pNumber} order by pbrno
+	</select>
+	
+	<insert id="insert" parameterType="rpdboard">
+		<selectKey keyProperty="pbrno" order="BEFORE" resultType="integer">
+			select nvl(max(pbrno),0)+1 from PBreplyBoard
+		</selectKey>
+		insert into PBreplyBoard values(#{pbrno},1,#{pbr_writer},
+			#{id},#{pbr_content},sysdate,sysdate,'n')
+	</insert>
+	
+	<update id="update" parameterType="rpdboard">
+		update PBreplyBoard set pbr_content=#{pbr_content},
+			pbr_updatedate=sysdate where pbrno=#{pbrno}
+	</update>
+	
+	<update id="delete" parameterType="integer">
+		update PBreplyBoard set del='y' where pbrno=#{pbrno}
+	</update>
+	
+</mapper>

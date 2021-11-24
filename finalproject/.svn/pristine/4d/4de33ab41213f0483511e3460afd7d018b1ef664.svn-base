@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../taglib.jsp"%>
+<%@ include file="../sessionChk.jsp"%>
+<%@ include file="../header.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<body>
+	<div class="container-fluid" align="center">
+		<h3>${pmember.memName }님 반가워요(•ө•)♡</h3>
+		<table class="table">
+			<tr>
+				<th>사용자 설정</th>
+				<th>리뷰 관리</th>
+				<th>결제 관리</th>
+			</tr>
+			<tr>
+				<td><a href="view.do">내 정보 조회</a></td>
+				<td valign="top"><a href="myReviewList.do">내가 쓴 리뷰</a></td>
+				<td><a href="pChargeList.do">충전 및 사용 내역</a></td>
+			</tr>
+
+			<tr>
+				<td><a href="passChkForm.do">비밀번호 변경</a></td>
+				<td rowspan="2" valign="top"><a href="myHashtag.do">리뷰 분석 보고서</a></td>
+				<td rowspan="2" valign="top"><a href="pChargeForm.do">포인트 충전</a></td>
+			</tr>
+
+			<tr>
+				<td><a href="memDelForm.do">회원 탈퇴</a></td>
+			</tr>
+		</table>
+
+	</div>
+</body>
+</body>
+</html>

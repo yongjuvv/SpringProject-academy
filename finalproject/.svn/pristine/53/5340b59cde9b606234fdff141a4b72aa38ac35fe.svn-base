@@ -1,0 +1,70 @@
+package com.ch.project.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ch.project.model.Review;
+import com.ch.project.model.Tv;
+import com.ch.project.service.HashtagService;
+import com.ch.project.service.PersonService;
+import com.ch.project.service.ReviewService;
+import com.ch.project.service.TvService;
+
+@Controller
+public class TvController {
+	@Autowired
+	private TvService ts;
+	@Autowired
+	private ReviewService rs;
+	@Autowired
+	private PersonService ps;
+	@Autowired
+	private HashtagService hs;
+	// tv 상세 페이지
+	@RequestMapping("tvSearchResult")
+	public String tvSearchResult(HttpSession session, int tvNum, Model model) {
+		
+		Tv tv = ts.select(tvNum);
+		
+		//감독이름 배우이름 가져오기
+		tv.setTvDirName(ps.getTvDirName(tv.getTvDirNum()));
+		if(tv.getActNum1()!=0) tv.setActName1(ps.getActName(tv.getActNum1()));
+		if(tv.getActNum2()!=0) tv.setActName2(ps.getActName(tv.getActNum2()));
+		if(tv.getActNum3()!=0) tv.setActName3(ps.getActName(tv.getActNum3()));
+		if(tv.getActNum4()!=0) tv.setActName4(ps.getActName(tv.getActNum4()));
+		if(tv.getActNum5()!=0) tv.setActName5(ps.getActName(tv.getActNum5()));
+		if(tv.getActNum6()!=0) tv.setActName6(ps.getActName(tv.getActNum6()));
+		if(tv.getActNum7()!=0) tv.setActName7(ps.getActName(tv.getActNum7()));
+		
+		/* 빈 칸을 검색하거나 DB에 없는 결과일 때 */
+		int result = 0;
+		if (tv != null)
+			result = 1;
+		
+		String email = (String) session.getAttribute("email");
+		/*String tvState = null;*/
+		
+		if (email != null) {
+			Review review = rs.selectTvReview(email, tvNum);
+			model.addAttribute("review", review);
+		}
+		
+		List<Review> tvReviewList = rs.tvReviewList(tvNum);
+		for (Review re : tvReviewList) {
+			re.setHashName1(hs.getHashName(re.getHashNum1()));
+			re.setHashName2(hs.getHashName(re.getHashNum2()));
+			re.setHashName3(hs.getHashName(re.getHashNum3()));
+		}
+		model.addAttribute("tv", tv);
+		model.addAttribute("result", result);
+		model.addAttribute("tvReviewList", tvReviewList);
+		
+		return "tvNmovie/tvSearchResult";
+	}
+}

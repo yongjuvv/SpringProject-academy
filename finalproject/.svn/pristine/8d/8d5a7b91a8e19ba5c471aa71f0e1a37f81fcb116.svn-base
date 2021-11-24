@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hashtagns">
+	<resultMap type="hashtag" id="hashtagResult">
+		<result property="hashNum" column="hashNum" />
+		<result property="hashName" column="hashName" />
+	</resultMap>
+
+	<select id="select" parameterType="int" resultType="hashtag">
+		select * from hashtag1 where hashNum=#{hashNum}
+	</select>
+	
+	<select id="list" resultMap="hashtagResult">
+		select s.* from (select * from
+		hashtag1 order by DBMS_random.value) s where
+		rownum between 1 and 25
+	</select>
+
+	<!-- 해시태그 전체 목록 -->
+	<select id="allList" resultMap="hashtagResult">
+		SELECT * FROM HASHTAG1
+	</select>
+	
+	<!-- 리뷰 작성 폼에 뜨는 해시태그 -->
+	<select id="getHashName" parameterType="int" resultType="string">
+	 SELECT HASHNAME FROM HASHTAG1 WHERE HASHNUM = #{hashNum}
+	</select>
+	<!-- 전체 해시태그  갯수-->
+	<select id="count" resultType="int">
+	 select count(*) from 
+	 (select hashNum from review1, hashtag where hashNum1 = hashNum or hashNum2 = hashNum2
+	 or hashNum3 =hashNum3)
+	</select>
+</mapper>

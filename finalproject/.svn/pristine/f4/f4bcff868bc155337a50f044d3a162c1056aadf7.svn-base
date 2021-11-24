@@ -1,0 +1,11 @@
+package com.ch.project.service;
+
+import com.ch.project.model.Pay;
+
+public interface PayService {
+
+	int payMovInsert(String email, int movNum);
+
+	Pay payConfirm(String email, int movNum);
+
+}

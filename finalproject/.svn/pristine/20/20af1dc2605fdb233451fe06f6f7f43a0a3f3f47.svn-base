@@ -1,0 +1,82 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="taglib.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	$(document).ready(function() {
+		$("input[type='checkbox']").on("click", function() {
+			var count = $("input:checked[type='checkbox']").length;
+			if (frm.spoilerCheckbox.checked == true)
+				count = count - 1;
+			if (count > 3) {
+				$(this).attr("checked", false);
+				alert("해시태그는 3개까지만 선택할 수 있어요");
+				return false;
+			}
+		});
+	});
+	
+	// 리뷰 글자 수 표시
+	$(function() {
+		$('#reviewComm').keyup(function(e) {
+			var reviewComm = $(this).val();
+			$('#counter').html(reviewComm.length + '/300');
+		});
+		$('#reviewComm').keyup();
+	});
+</script>
+</head>
+<body>
+	<p>
+		영화 상세 페이지 <a href="#insertComm">코멘트 남기기</a>
+	</p>
+	<div class="white_content" id="insertComm">
+		<div>
+			<p>
+				<a href="#close">닫기</a>
+			</p>
+			<div class="container-fluid" align="center">
+				<form action="reviewSubmit.do" method="post" name="frm"
+					onsubmit="return chk()">
+					<input type="hidden" name="movNum" value="${movNum}">
+					<input type="hidden" name="tvNum" value="${tvNum}">
+					<input type="hidden" name="email" value="${email}">
+					<table class="table">
+						<tr>
+							<td colspan="2"><textarea rows="5" name="reviewComm"
+									id="reviewComm" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요"
+									maxlength="300" class="textarea form-control"></textarea></td>
+						</tr>
+
+						<!-- 글자 수 표시, 스포일러 체크 -->
+						<tr>
+							<td><span id="counter" class="counter">###</span></td>
+							<td align="right"><input type="checkbox"
+								name="spoilerCheckbox" id="spoilerCheckbox" value="y"> <label
+								for="spoilerCheckbox">내 리뷰에 스포일러가 있어요</label></td>
+						</tr>
+
+						<!-- 해시태그 목록 -->
+						<tr>
+							<td colspan="2"><c:forEach var="hashtag" items="${list2 }">
+									<input type="checkbox" id="${hashtag.hashNum}" name="hashtags"
+										value="${hashtag.hashNum}">
+									<label for="${hashtag.hashNum}" class="review_hashtag">${hashtag.hashName}</label>
+								</c:forEach></td>
+						</tr>
+
+						<tr>
+							<td colspan="2" align="center"><input type="submit"
+								value="등록" class="btn btn-info"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

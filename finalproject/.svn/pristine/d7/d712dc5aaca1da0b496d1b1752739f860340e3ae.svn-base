@@ -1,0 +1,54 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="header.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+footer {font-family: 'Nanum Gothic', sans-serif; text-align: center; text-transform: lowercase;}
+</style>
+</head><body>
+<nav class="navbar navbar-inverse">
+   <div class="container-fluid">
+     </div>
+     <ul class="nav navbar-nav">
+       <li class="active"><a href="#">Home</a></li>
+     </ul>
+     <ul class="nav navbar-nav navbar-right">
+       <li><a href="#"><span class="glyphicon glyphicon-movieSearch"></span> 영화검색</a></li>
+       <li><a href="#"><span class="glyphicon glyphicon-login"></span> 로그인</a></li>
+       <li><a href="#"><span class="glyphicon glyphicon-member"></span> 회원가입</a></li>
+     </ul>
+</nav>
+
+<div class="logo">
+		<h2><a href="movieTotalList.do" style="color: black;">#</a></h2>
+		</div>
+<section id="na">
+ 	<form action="movieSearch.do" >
+     <input type="search" name="search" placeholder="영화 제목을 검색해보세요" >
+     </form> 
+	</section>
+	
+ 
+<div class="container" align="center">
+		<c:if test="${not empty list }">
+			<c:forEach var="hashtag" items="${list }">
+			<a href="hashtagResult.do?hashNum=${hashtag.hashNum}">
+				#${hashtag.hashName}</a>
+			</c:forEach>
+		</c:if>
+		<form id="button">
+			<input type="button" onclick="window.location.reload()" value="↺" />
+		</form>
+	</div>
+ <a href="faList.do?">추천리스트</a>
+ <div>
+ <hr><footer><div class="footer-copyright text-center py-3">© 지금까지 <a href="#" class="btn btn-danger">${count}개의 #해시태그</a>
+          <td>가 쌓였어요</td>
+     <div><a href="https://mdbootstrap.com/education/bootstrap/"> 사업자등록번호 (123-45-67890) (주)해시 고객센터 : cs@hash.tag</a></div>
+  	</div></footer>
+  	
+</div></body></html>

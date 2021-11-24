@@ -1,0 +1,117 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../header.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>${movie.movName}</title>
+</head>
+<body>
+
+	<div class="container" align="center">
+		<table class="table">
+		<tr>
+				<td rowspan="4" width="30%" valign="top">
+					<img alt="" src="<%=request.getContextPath()%>/images/${movie.movPic}" width="300" height="450">
+				</td>
+				<td>${movie.movName}</td>
+			</tr>
+			<tr>
+				<td valign="top">
+					<p>
+						<fmt:formatDate value="${movie.movDate}" pattern="yyyy" />
+						· ${movie.prod} · ${movie.movGrade}
+					</p>
+					<p>${movie.movGenre1 }<c:if test="${movie.movGenre2 != null}">, ${movie.movGenre2 }</c:if>
+					</p>
+					<p>${movie.movDirName}
+						감독 · ${movie.actName1}
+						<c:if test="${movie.actName2 != null}">, ${movie.actName2}</c:if>
+						<c:if test="${movie.actName3 != null}">, ${movie.actName3}</c:if>
+						<c:if test="${movie.actName4 != null}">, ${movie.actName4}</c:if>
+						<c:if test="${movie.actName5 != null}">, ${movie.actName5}</c:if>
+						<c:if test="${movie.actName6 != null}">, ${movie.actName6}</c:if>
+						<c:if test="${movie.actName7 != null}">, ${movie.actName7}</c:if>
+					</p>
+				</td>
+			<tr>
+				<td>
+					<p>${movie.movDesc}</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<c:if test="${not empty email && empty review}">
+					<button onclick="location.href='movReviewInsertForm.do?movNum=${movie.movNum}'">코멘트 남기기</button>
+					</c:if>
+					<c:if test="${not empty email && empty movState}">
+					<input type="button" value="결제하기 (${movie.movPrice}원)" onclick="location.href='movPayForm.do?movNum=${movie.movNum}'">
+					</c:if>
+					<c:if test="${not empty email && movState == 'y'}"> 
+					<input type="button" value="PLAY" onclick="location.href='viewMovie.do?movNum=${movie.movNum}'">
+					</c:if>
+				</td>
+			</tr>
+		</table>
+	
+
+		<section>
+		<table class="table">
+			<caption>다른 사용자들이 선택한 ${movie.movName}의 해시태그입니다</caption>
+			<tr>
+				<td>
+					<p>
+					<c:forEach var="hashtaglist" items="${hashtaglist }">
+						#${hashtaglist.hashName}
+					</c:forEach>
+					</p>
+				</td>
+			</tr>
+		</table>
+	</section>
+			 
+	 	<section>
+	 		<table class="table" id="list">
+			<caption><strong>리뷰</strong></caption>
+			
+				<c:forEach var="review" items="${movieReviewList}">
+					<tr>
+						<td rowspan="2" width="20%" style="text-align: center;">
+							<a href="otherReviewList.do?email=${review.email}">
+							<span id="review_nickName">${review.nickName}</span>
+							</a>
+						</td>
+						<c:if test="${not empty review.reviewComm}">
+							<c:if test="${review.reviewSpoiler=='n'}">
+								<td colspan="3" id="comm">${review.reviewComm}</td>
+							</c:if>
+							<c:if test="${review.reviewSpoiler=='y'}">
+								<td colspan="3" id="readmore" style="border-right: none;">
+									<span class="readmore">스포일러가 있는 리뷰입니다
+									</span>
+									<div class="comm" id="comm">${review.reviewComm}</div>
+								</td>
+							</c:if>
+						</c:if>
+						<c:if test="${empty review.reviewComm}">
+							<td colspan="3" id="comm">"리뷰가 없습니다"</td>
+						</c:if>
+					</tr>
+					<tr id="bold16">
+						<td id="review_fin" style="border-right: none;">
+							<span id="review_hashtag">#${review.hashName1 }</span>
+						<c:if test="${review.hashName2!=null }">
+							<span id="review_hashtag">#${review.hashName2 }</span>
+						</c:if>
+						<c:if test="${review.hashName3!=null }">
+							<span id="review_hashtag">#${review.hashName3 }</span>
+						</c:if>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+	</section>
+</div>
+</body>
+</html>

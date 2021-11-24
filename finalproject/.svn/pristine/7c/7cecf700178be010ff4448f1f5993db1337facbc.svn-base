@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pmemberns">
+	<resultMap type="pmember" id="pMemberResult">
+		<result property="email" column="email" />
+		<result property="pass" column="pass" />
+		<result property="memName" column="memName" />
+		<result property="nickName" column="nickName" />
+		<result property="memPic" column="memPic" />
+		<result property="memBirth" column="memBirth" />
+		<result property="memPoint" column="memPoint" />
+		<result property="regDate" column="regDate" />
+		<result property="memDel" column="memDel" />
+		<result property="pProductNum" column="pProductNum" />
+		<result property="pProductPoint" column="pProductPoint" />
+		<result property="movNum" column="movNum" />
+		<result property="movPrice" column="movPrice" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="pmember">
+	insert into pmember1 values (#{email}, #{pass}, #{memName}, #{nickName}, 'default.jpg', #{memBirth}, 0, sysdate, 'n')
+	</insert>
+	<select id="emailChk" parameterType="string" resultType="int">
+	SELECT NVL(COUNT(*),0) FROM pmember1 WHERE email=#{email}
+	</select>
+	<select id="select" parameterType="string" resultType="pmember">
+	select * from pmember1 where email = #{email}
+	</select>
+	<update id="delete" parameterType="string">
+	update pmember1 set memDel='y' where email = #{email}
+	</update>
+	<update id="update" parameterType="pmember">
+	update pmember1 set nickName=#{nickName}, memBirth=#{memBirth} where email = #{email}
+	</update>
+	<update id="memPointUpdate" parameterType="string">
+	update pmember1 set memPoint=memPoint+
+	(select pProductPoint from pProduct1 where pProductNum=#{pProductNum}) 
+	where email = #{email}
+	</update>
+	<update id="memPointUpdate2" parameterType="string">
+	update pmember1 set memPoint=memPoint-
+	(select movPrice from movie1 where movNum=#{movNum}) 
+	where email = #{email}
+	</update>
+	
+</mapper>

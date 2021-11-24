@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="collectns">
+	<resultMap type="collect" id="collectResult">
+		<result property="collNum"		column="collNum" />
+		<result property="email"		column="email" />
+		<result property="collName"		column="collName" />
+		<result property="collDesc"		column="collDesc" />
+		<result property="collDate"		column="collDate" />
+		<result property="collVidNum"	column="collVidNum" />
+		<result property="movNum"		column="movNum" />
+		<result property="tvNum"		column="tvNum" />
+		<result property="cartNum"		column="cartNum" />
+		<result property="movName"		column="movName" />
+		<result property="movPic"		column="movPic" />
+		<result property="movGenre1"	column="movGenre1" />
+		<result property="movDate"		column="movDate" />
+		<result property="nickName"		column="nickName" />
+	</resultMap>
+	<insert id="insertCollect" parameterType="hashMap">
+		<selectKey keyProperty="cartNum" order="BEFORE" resultType="int">
+			select nvl(max(cartNum), 0) + 1 from cart1
+		</selectKey>
+		insert into cart1 values (
+			#{cartNum}, #{email}, #{movNum}, #{tvNum})
+	</insert>
+	
+	<insert id="insert" parameterType="hashMap">
+		<selectKey keyProperty="collNum" order="BEFORE" resultType="int">
+			select nvl(max(collNum), 0) + 1 collNum from collect1
+		</selectKey>
+		insert into collect1 values (#{collNum}, #{email}, null, null,
+		sysdate, 0)
+	</insert>
+	
+	<select id="cartList" parameterType="string" resultMap="collectResult">
+		select cartNum, c.email, c.movNum, tvNum, movName, movPic, movGenre1, movDate
+			from cart1 c, movie1 m where c.movNum=m.movNum and email=#{email}
+	</select>
+	
+	<insert id="insertCollectToCollection" parameterType="collect">
+		<selectKey keyProperty="collNum" order="BEFORE" resultType="int">
+			select nvl(max(collNum), 0) + 1 collNum from collect1
+		</selectKey>
+		insert into collect1 values (#{collNum}, #{email}, #{collName}, #{collDesc}, sysdate)
+		</insert>
+	
+	<insert id="insertCollVid" parameterType="hashMap">
+		insert into collVideo1 (collVidNum, collNum, movNum, tvNum) 
+			select collVideo1_seq.nextval, #{collNum}, movNum, tvNum from cart1 where email=#{email}
+	</insert>
+	
+	<delete id="deleteCart" parameterType="string">
+		delete from cart1 where email=#{email}
+	</delete>
+	
+	<select id="collectList" parameterType="string" resultType="collect">
+		select *
+		from (select a.*, rowNum rn from (
+		select * from collect1 where email=#{email} order by collDate desc)a)
+		where (rn between #{startRow} and #{endRow})
+	</select>
+	<select id="selectCollect" parameterType="int" resultType="collect">
+		select * from collect1 where collNum=#{collNum} 
+	</select>
+</mapper>

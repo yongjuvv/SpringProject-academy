@@ -1,0 +1,103 @@
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<!--기본 레이아웃 -->
+	<definition name="tilesbase"
+		template="/WEB-INF/views/tile/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header1"
+			value="/WEB-INF/views/tile/header1.jsp" />
+		<put-attribute name="subBody"
+			value="/WEB-INF/views/tile/subBody.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/tile/menu.jsp" />
+		<put-attribute name="body1" value="" />
+		<put-attribute name="body2"
+			value="/WEB-INF/views/tile/body2.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/tile/footer.jsp" />
+	</definition>
+
+	<!-- 변형 레이아웃 -->
+	<definition name="main" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/tile/main.jsp" />
+	</definition>
+	<definition name="joinForm" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/login/joinForm.jsp" />
+	</definition>
+	<definition name="PBview" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/tile/PBview.jsp" />
+	</definition>
+	<definition name="extra1" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/extra1.jsp" />
+	</definition>
+	<definition name="extra2" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/tile/extra1.jsp" />
+	</definition>
+	<definition name="mypage" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/mypage/mypage.jsp" />
+	</definition>
+	<definition name="loginForm" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/login/loginForm.jsp" />
+	</definition>
+	<definition name="myinfoUpdateForm" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/mypage/myinfoUpdateForm.jsp" />
+	</definition>
+	<definition name="myinfo" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/mypage/myinfo.jsp"></put-attribute>
+	</definition>
+	<definition name="insertPetInfo" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/mypage/insertPetInfo.jsp" />
+	</definition>
+
+	<definition name="helplist" extends="tilesbase">
+		<put-attribute name="title" value="asd" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/helpBoard/helplist.jsp" />
+	</definition>
+	
+	<definition name="helpInsertForm" extends="tilesbase">
+		<put-attribute name="title" value="asd" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/helpBoard/helpInsertForm.jsp" />
+	</definition>
+	
+	<definition name="helpView" extends="tilesbase">
+		<put-attribute name="title" value="asd" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/helpBoard/helpView.jsp" />
+	</definition>
+	
+	<definition name="helpUpdateForm" extends="tilesbase">
+		<put-attribute name="title" value="asd" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/helpBoard/helpUpdateForm.jsp" />
+	</definition>
+	<definition name="location" extends="tilesbase">
+		<put-attribute name="title" value="location" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/location/location.jsp" />
+	</definition>
+	
+</tiles-definitions>

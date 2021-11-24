@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../header.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.all{
+	margin : 10px;
+	margin-left: 0;
+	padding : 10px;
+ 	padding-left : 0;
+	height: 150px;
+}
+.pAll{
+	font-size: 25px;
+	font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<div class="row">
+<c:if test="${not empty movieList || not empty tvList }">
+ <c:if test="${not empty movieList }">
+ <div class="all">
+ <p class="pAll">영화</p>
+	<!--  movie.blarblar -->
+ <c:forEach var="movie" items="${movieList}">
+ 	<table>
+ 	<tr><td><a href="movSearchResult.do?movNum=${movie.movNum}">${movie.movPic}</a></td></tr>
+ 	<tr><td><a href="movSearchResult.do?movNum=${movie.movNum}">${movie.movName} · ${movie.movDate}</a></td></tr>
+ 	</table>
+ </c:forEach>
+ </div>
+ </c:if>
+ <hr>
+ <c:if test="${not empty tvList}">
+ <div class="all">
+ <p class="pAll">tv</p>
+ <c:forEach var="tv" items="${tvList}">
+ 	<table>
+ 	<tr><td><a href="tvSearchResult.do?tvNum=${tv.tvNum}">${tv.tvPic}</a></td></tr>
+ 	<tr><td><a href="tvSearchResult.do?tvNum=${tv.tvNum}">${tv.tvName} · ${tv.tvDate}</a></td></tr>
+ 	</table>
+ </c:forEach>
+ </div>
+ </c:if>
+ </c:if>
+ <c:if test="${empty movieList && empty tvList}">
+	 검색결과가 없습니다. 다른 검색어를 입력해보세요.
+ </c:if>
+</div>
+</div>
+
+<%@ include file="../footer.jsp"%>

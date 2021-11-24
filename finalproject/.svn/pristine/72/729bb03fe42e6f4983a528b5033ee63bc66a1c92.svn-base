@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pproductns">
+	<resultMap type="pproduct" id="pproductResult">
+		<result property="pProductNum" column="pProductNum" />
+		<result property="pProductPrice" column="pProductPrice" />
+		<result property="pDesc" column="pDesc" />
+		<result property="pProductPoint" column="pProductPoint" />
+	</resultMap>
+
+<select id="select" parameterType="int" resultType="pproduct">
+select * from pproduct1 where pProductNum = #{pProductNum}
+</select>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="payns">
+	<resultMap type="pay" id="payResult">
+		<result property="payNum" column="payNum" />
+		<result property="email" column="email" />
+		<result property="tvNum" column="tvNum" />
+		<result property="tvEpNum" column="tvEpNum" />
+		<result property="movNum" column="movNum" />
+		<result property="payDate" column="payDate" />
+		<result property="payState" column="payState" />
+	</resultMap>
+	
+	<insert id="payMovInsert" parameterType="string">
+		<selectKey keyProperty="payNum" order="BEFORE" resultType="int">
+			select nvl(max(payNum),0)+1 from pay1
+		</selectKey>
+		insert into pay1 (payNum, email, tvNum,movNum, payDate, payState)
+		values (#{payNum}, #{email} , null, #{movNum}, sysdate, 'y')
+	</insert>
+	
+	<select id="payMovConfirm" parameterType="string" resultType="pay">
+		select * from pay1 where email=#{email} and movNum=#{movNum}
+	</select>
+	
+	<select id="payTvConfirm" parameterType="hashMap" resultType="pay">
+		select * from pay1 where email=#{email} and tvNum=#{tvNum} and tvEpNum=#{tvEpNum}
+	</select>
+	
+	<insert id="payTvInsert" parameterType="string">
+		<selectKey keyProperty="payNum" order="BEFORE" resultType="int">
+			select nvl(max(payNum),0)+1 from pay1
+		</selectKey>
+		insert into pay1 (payNum, email, tvNum,tvEpNum, payDate, payState)
+		values (#{payNum}, #{email} , #{tvNum},#{tvEpNum},sysdate, 'y')
+	</insert>
+</mapper>

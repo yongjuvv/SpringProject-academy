@@ -1,0 +1,64 @@
+package com.ch.project.model;
+
+import java.sql.Timestamp;
+
+public class CoReply {
+	private int coReplyNum;
+	private int reviewNum;
+	private String email;
+	private String coReEmail;
+	private Timestamp coReDate;
+	private Timestamp coReUpdate;
+	private String coReCont;
+	private String coReDel;
+	
+	public int getCoReplyNum() {
+		return coReplyNum;
+	}
+	public void setCoReplyNum(int coReplyNum) {
+		this.coReplyNum = coReplyNum;
+	}
+	public int getReviewNum() {
+		return reviewNum;
+	}
+	public void setReviewNum(int reviewNum) {
+		this.reviewNum = reviewNum;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getCoReEmail() {
+		return coReEmail;
+	}
+	public void setCoReEmail(String coReEmail) {
+		this.coReEmail = coReEmail;
+	}
+	public Timestamp getCoReDate() {
+		return coReDate;
+	}
+	public void setCoReDate(Timestamp coReDate) {
+		this.coReDate = coReDate;
+	}
+	public Timestamp getcoReUpdate() {
+		return coReUpdate;
+	}
+	public void setCoReUpdate(Timestamp coReUpdate) {
+		this.coReUpdate = coReUpdate;
+	}
+	public String getCoReCont() {
+		return coReCont;
+	}
+	public void setCoReCont(String coReCont) {
+		this.coReCont = coReCont;
+	}
+	public String getCoReDel() {
+		return coReDel;
+	}
+	public void setCoReDel(String coReDel) {
+		this.coReDel = coReDel;
+	}
+
+}

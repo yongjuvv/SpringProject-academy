@@ -1,0 +1,20 @@
+package com.ch.project.service;
+
+import java.util.List;
+
+import com.ch.project.model.Hashtag;
+
+public interface HashtagService {
+
+
+	Hashtag select(int hashNum);
+
+	List<Hashtag> list();
+	
+	//해시태그 전체 목록 
+	List<Hashtag> allList();
+	
+	String getHashName(int hashNum);
+
+	int count();
+}

@@ -1,0 +1,45 @@
+package com.ch.project.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.ch.project.model.Hashtag;
+
+@Repository
+public class HashtagDaoImpl implements HashtagDao {
+	@Autowired
+	private SqlSessionTemplate sst;
+
+	@Override
+	public List<Hashtag> list() {
+		return sst.selectList("hashtagns.list");
+	}
+
+
+	// 해시태그 전체 목록
+	@Override
+	public List<Hashtag> allList() {
+		return sst.selectList("hashtagns.allList");
+	}
+	
+	// 해시태그 숫자로 이름 가져오기
+	@Override
+	public String getHashName(int hashNum) {
+		return sst.selectOne("hashtagns.getHashName", hashNum);
+	}
+
+
+	@Override
+	public Hashtag select(int hashNum) {
+		return sst.selectOne("hashtagns.select", hashNum);
+	}
+
+
+	@Override
+	public int count() {
+		return sst.selectOne("hashtagns.count");
+	}
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="coreplyns">
+	<resultMap type="coreply"			id="coreplyResult">
+		<result property="coReplyNum"	column="coReplyNum" />
+		<result property="reviewNum"	column="reviewNum" />
+		<result property="email"		column="email" />
+		<result property="coReEmail"	column="coReEmail" />
+		<result property="coReDate"		column="coReDate" />
+		<result property="coReUpdate"	column="coReUpdate" />
+		<result property="coReCont"		column="coReCont" />
+		<result property="coReDel"		column="coReDel" />
+		<result property="nickName"		column="nickName" />
+	</resultMap>
+	
+	<!-- 리뷰 댓글 리스트 (pmember1 테이블과 join한 이유: 댓글 작성자의 닉네임 데려오기) -->
+	<select id="list" parameterType="int" resultType="coreply">
+		select * from coReply1 c, pmember1 p
+			where c.coReEmail=p.email and c.reviewNum=#{reviewNum} order by coReDate
+	</select>
+	
+	<!-- 리뷰 댓글 남기기 -->
+	<insert id="insert" parameterType="coreply">
+		<selectKey keyProperty="coReplyNum" order="BEFORE" resultType="int">
+			select nvl(max(coReplyNum), 0) + 1 from coReply1
+		</selectKey>
+		insert into coReply1 values (
+			#{coReplyNum}, #{reviewNum}, null, #{coReEmail}, sysdate, sysdate, #{coReCont}, 'n')
+	</insert>
+	
+	<!-- 리뷰 댓글 수 -->
+	<select id="replycount" parameterType="int" resultType="int">
+		select count(*) from coReply1 where reviewNum=#{reviewNum} and coReDel='n'
+	</select>
+	
+	<!-- 리뷰 댓글 수정 -->
+	<update id="update" parameterType="coreply">
+		update coReply1 set coReCont=#{coReCont}, coReUpdate=sysdate where coReplyNum=#{coReplyNum} 
+	</update>
+	
+	<!-- 리뷰 댓글 삭제 -->
+	<update id="delete" parameterType="int">
+		update coReply1 set coReDel='y' where coReplyNum=#{coReplyNum}
+	</update>
+	
+</mapper>

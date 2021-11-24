@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="likens">
+	<resultMap type="like" id="likeResult">
+		<result property="likeNum" column="likeNum" />
+		<result property="reviewNum" column="reviewNum" />
+		<result property="email" column="email" />
+		<result property="likeChk" column="likeChk" />
+	</resultMap>
+	
+	<!-- like 테이블 전체 데이터 조회 -->
+	<select id="select" parameterType="hashMap" resultType="like">
+		SELECT * FROM LIKE1 WHERE EMAIL=#{email} AND REVIEWNUM=#{reviewNum}
+	</select>
+	
+	<!-- likeChk 존재 여부 조회 -->
+	<select id="countLikeChk" parameterType="hashMap" resultType="int">
+		SELECT count(*) FROM LIKE1 WHERE EMAIL=#{email} AND REVIEWNUM=#{reviewNum}
+	</select>
+	
+	<!-- like 테이블에 데이터 삽입 -->
+	<insert id="insertData" parameterType="hashMap">
+		INSERT INTO LIKE1 VALUES (#{reviewNum}, #{email}, 0)
+	</insert>
+	
+	<!-- 좋아요 클릭 시 -->
+	<update id="insertLike" parameterType="hashMap">
+		UPDATE LIKE1 SET likeChk = 1
+			WHERE EMAIL=#{email} AND REVIEWNUM=#{reviewNum}
+	</update>
+	
+	<!-- 좋아요 취소 시 delete로 -->
+	<delete id="deleteLike" parameterType="hashMap">
+		DELETE FROM LIKE1
+			WHERE EMAIL=#{email} AND REVIEWNUM=#{reviewNum}
+	</delete>
+
+	<!-- 좋아요 취소 시 update로 -->
+	<update id="cancle" parameterType="hashMap">
+		UPDATE LIKE1 SET likeChk = 0
+			WHERE EMAIL=#{email} AND REVIEWNUM=#{reviewNum}
+	</update>
+
+</mapper>

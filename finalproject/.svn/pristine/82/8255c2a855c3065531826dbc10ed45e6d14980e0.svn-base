@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="taglib.jsp"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+	<form action="movReviewSubmit.do" method="post" name="frm" onsubmit="return chk()">
+		<input type="hidden" name="movNum" value="${movie.movNum}">
+		<input type="hidden" name="email" value="${email}">
+	<div class="container">
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-4"><h3>${movie.movName }</h3></div>
+			<div class="col-4"></div>
+		</div>
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-4">
+					<textarea rows="5" name="reviewComm" id="reviewComm"
+						placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요"
+						maxlength="300" class="form-control"></textarea>
+			</div>
+			<div class="col-4"></div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-2"></div>
+			<div class="col-2">
+				<span id="counter" class="counter">###</span>
+			</div>
+			<div class="col-2"></div>
+			<div class="col-4">
+					<input type="checkbox" name="spoilerCheckbox" id="spoilerCheckbox" value="y" />
+					<label for="spoilerCheckbox">스포일러 있어요</label>
+			</div>
+			<div class="col-2"></div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-4">
+				<c:forEach var="hashtag" items="${list }">
+						<input type="checkbox" id="${hashtag.hashNum}" name="hashtags" value="${hashtag.hashNum}">
+						<label for="${hashtag.hashNum}" class="hashlabel">${hashtag.hashName}</label>
+						</c:forEach>
+			</div>
+			<div class="col-4"></div>
+		</div>
+		<div class="row"><input type="submit" value="등록" class="btn btn-info"></div>
+	</div>
+</form>
+</body>
+</html>

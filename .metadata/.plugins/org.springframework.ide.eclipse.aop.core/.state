@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="finalproject"/>
+<aop-project name="loginpro"/>
+<aop-project name="project"/>
+<aop-project name="projectFinal"/>
+<aop-project name="ch11"/>
+<aop-project name="ch13"/>
+<aop-project name="ch09"/>
+<aop-project name="ch10"/>
+<aop-project name="loginpro1"/>
+<aop-project name="Project1019"/>
+<aop-project name="joinpro"/>
+</aop-reference-model>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="collvideons">
+	<resultMap type="collvideo" id="collvideoResult">
+		<result property="collVidNum" column="collVidNum" />
+		<result property="collNum" column="collNum" />
+		<result property="movNum" column="movNum" />
+		<result property="tvNum" column="tvNum" />
+		<result property="movPic" column="movPic" />
+		<result property="movName" column="movName" />
+		<result property="movGenre1" column="movGenre1" />
+	</resultMap>
+	<select id="CollVideoList" resultMap="collvideoResult" parameterType="int"> 
+		select c.*, movPic,movName,movGenre1 from collVideo1 c,
+		movie1 m where m.movNum=c.movNum and collNum=#{collNum} 
+	</select>
+	
+</mapper>

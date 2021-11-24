@@ -1,0 +1,104 @@
+package com.ch.project.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ch.project.dao.ReviewDao;
+import com.ch.project.model.Movie;
+import com.ch.project.model.Review;
+
+@Service
+public class ReviewServiceImpl implements ReviewService {
+	
+	@Autowired
+	private ReviewDao rd;
+
+	@Override
+	public Review selectMovReview(String email, int movNum) {
+		return rd.selectMovReview(email, movNum);
+	}
+
+	@Override
+	public Review selectTvReview(String email, int tvNum) {
+		return rd.selectMovReview(email, tvNum);
+	}
+
+	@Override
+	public int movInsertNoSpoiler(Review review) {
+		return rd.movInsertNoSpoiler(review);
+	}
+
+	@Override
+	public int movInsertSpoiler(Review review) {
+		return rd.movInsertSpoiler(review);
+	}
+
+	@Override
+	public int insertTvReviewNoSpoiler(Review review) {
+		return rd.insertTvReviewNoSpoiler(review);
+	}
+
+	@Override
+	public int insertTvReviewSpoiler(Review review) {
+		return rd.insertTvReviewSpoiler(review);
+	}
+
+	@Override
+	public List<Review> hashTvList(int hashNum) {
+		return rd.hashTvList(hashNum);
+	}
+	@Override
+	public List<Review> hashMoList(int hashNum) {
+		return rd.hashMoList(hashNum);
+	}
+
+	@Override
+	public List<Review> list(String email, int startRow, int endRow) {
+		return rd.list(email, startRow, endRow);
+	}
+
+	@Override
+	public int total(String email) {
+		return rd.total(email);
+	}
+
+	@Override
+	public List<Review> list2(String email, int startRow, int endRow) {
+		return rd.list2(email, startRow, endRow);
+	}
+
+	@Override
+	public int MovUpdateNoSpoiler(Review review) {
+		return rd.movUpdateNoSpoiler(review);
+	}
+
+	@Override
+	public int MovUpdateSpoiler(Review review) {
+		return rd.movUpdateSpoiler(review);
+	}
+
+	@Override
+	public int movDelete(Review review) {
+		return rd.movDelete(review);
+	}
+
+	@Override
+	public int movDelete2(String email, int movNum) {
+		return rd.movDelete2(email, movNum);
+	}
+
+	@Override
+	public List<Review> movieReviewList(int movNum) {
+		return rd.movieReviewList(movNum);
+	}
+
+	@Override
+	public List<Review> tvReviewList(int tvNum) {
+		return rd.tvReviewList(tvNum);
+	}
+
+
+
+}

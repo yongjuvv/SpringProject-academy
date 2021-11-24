@@ -1,0 +1,479 @@
+.NavTabManager_NavContainer {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+
+.NavTabManager_Main {
+	padding-top: 10;
+	padding-bottom: 0;
+}
+
+.UserAnalysisPage {
+	padding: 100px 0;
+}
+
+.UserAnalysisPage_Background {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
+	background: #f8f8f8;
+}
+
+.UserAnalysisPage_MaxGrid {
+	max-width: 640px;
+	margin: 0 auto;
+}
+
+.UserAnalysisPage_RoundedCornerBlock {
+	border: 1px solid;
+	border-radius: 6px;
+	background-image:
+		url('https://2.bp.blogspot.com/-i4qPS7x72ac/W-4hlSIebEI/AAAAAAAAAAY/X_7QKSyvMtQ2yrkp3wRws6jgRYx69ZB5wCLcBGAs/s1600/background-1121216_1920.jpg');
+	background-repeat: no-repeat;
+	border-color: #e3e3e3 !important;
+	overflow: hidden;
+	position: relative;
+}
+
+.UserAnalysisPage_AnalysisHeaderBackground {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 0;
+}
+
+.UserAnalysisPage_AnalysisHeader {
+	background-image:
+		url('https://2.bp.blogspot.com/-i4qPS7x72ac/W-4hlSIebEI/AAAAAAAAAAY/X_7QKSyvMtQ2yrkp3wRws6jgRYx69ZB5wCLcBGAs/s1600/background-1121216_1920.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.UserAnalysisPage_AnalysisHeaderGrid {
+	
+}
+
+.AnalysisHeaderRow {
+	margin: 0 20px;
+}
+
+.UserAnalysisPage_LogoContainer {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	padding: 16px 0 8px;
+}
+
+.UserAnalysisPage_Logo {
+	vertical-align: top;
+	display: inline-block;
+	background-size: contain;
+	color: white;
+	font-weight: 700;
+	text-align: center;
+	font-size: 23;
+}
+
+.UserAnalysisPage_AnalysisTitle {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	margin: 0;
+	overflow: hidden;
+}
+
+.UserAnalysisPage_AnalysisWord {
+	font-size: 12px;
+	font-weight: 400;
+	-webkit-letter-spacing: -0.2px;
+	-moz-letter-spacing: -0.2px;
+	-ms-letter-spacing: -0.2px;
+	letter-spacing: -0.2px;
+	line-height: 19px;
+	color: #ffffff;
+	margin: 0 0 24px;
+}
+
+.ProfilePhotoBlock {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	position: relative;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	width: 56px;
+	height: 56px;
+	overflow: hidden;
+	width: 48px;
+	height: 48px;
+	border: 0;
+	margin: 0 auto;
+	border-radius: 50%;
+}
+
+.ProfilePhoto_ProfilePhotoImage {
+	position: relative;
+	z-index: 1;
+	background:
+		url(https://d3sz5r0rl9fxuc.cloudfront.net/assets/default/user/photo_file_name_small-bc8b334….jpg)
+		no-repeat center;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+}
+
+.ProfilePhoto_DefaultImageContainer {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	background: #f8f8f8;
+	width: 100%;
+	height: 100%;
+}
+
+.defaultImage__ProfileImg {
+	vertical-align: top;
+	width: 24px;
+	height: 24px;
+	border-style: none;
+}
+
+.UserAnalysisPage_UserName {
+	font-size: 19px;
+	font-weight: 700;
+	-webkit-letter-spacing: -0.7px;
+	-moz-letter-spacing: -0.7px;
+	-ms-letter-spacing: -0.7px;
+	letter-spacing: -0.7px;
+	line-height: 28px;
+	color: #ffffff;
+	text-align: center;
+	min-height: 56px;
+	margin: 8px 0 12px;
+	word-break: break-all;
+}
+
+.UserAnalysisPage_AnalysisRoundedCornerBlock {
+	background: transparent;
+	margin: 12px 0 0;
+	border: 1px solid;
+	border-radius: 6px;
+	border-color: #e3e3e3 !important;
+	overflow: hidden;
+}
+
+.AnalysisSectionWithHeader {
+	background: #fff;
+	padding: 8px 0 0;
+}
+
+.AnalysisSectionWithHeaderGrid {
+	
+}
+
+.AnalysisSectionWithHeaderRow {
+	margin: 0 20px;
+}
+
+.AnalysisSectionWithHeader_Header {
+	overflow: hidden;
+}
+
+.AnalysisSectionWithHeaderTitle {
+	font-size: 19px;
+	font-weight: 700;
+	-webkit-letter-spacing: -0.7px;
+	-moz-letter-spacing: -0.7px;
+	-ms-letter-spacing: -0.7px;
+	letter-spacing: -0.7px;
+	line-height: 28px;
+	float: left;
+	color: #000;
+	margin: 8px 0;
+}
+
+.UserAnalysisPage_CategorySumContainer {
+	margin-top: 20;
+}
+
+.UserAnalysisPage_StatSumUl {
+	margin: 0 -6px;
+	list-style: none;
+	padding: 0;
+	padding-left: 20px;
+}
+
+.StatSumList {
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	box-sizing: border-box;
+	width: 50%;
+	padding: 0 6px;
+}
+
+.StatSumListThree {
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	box-sizing: border-box;
+	padding: 0 6px;
+	width: 32%;
+}
+
+.StatSumList_Title {
+	font-size: 17px;
+	font-weight: 700;
+	-webkit-letter-spacing: -0.5px;
+	-moz-letter-spacing: -0.5px;
+	-ms-letter-spacing: -0.5px;
+	letter-spacing: -0.5px;
+	line-height: 22px;
+	margin: 0 0 4px;
+	text-align: center;
+}
+
+.StatSumList_SubTitle {
+	font-size: 12px;
+	font-weight: 400;
+	letter-spacing: -0.2px;
+	line-height: 16px;
+	color: #787878;
+	text-align: center;
+}
+
+.AnalysisSection_Divider {
+	margin: 24px 0 0;
+	border: 0;
+	border-bottom: 1px solid #f0f0f0;
+	box-sizing: content-box;
+	height: 0;
+	overflow: visible;
+}
+
+.RatingStat {
+	max-width: 375px;
+	margin: 8 auto 0 auto;
+}
+
+.RatingStat_BarContainer {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: flex-end;
+	-webkit-box-align: flex-end;
+	-ms-flex-align: flex-end;
+	align-items: flex-end;
+	text-align: center;
+	margin: 0 -1px;
+}
+
+.RatintStat_SumContainer {
+	padding: 24px 0 0;
+}
+
+.AnalysisSectionWithHeader_Rating {
+	margin: 0;
+	background: #fff;
+	padding: 8px 0 0;
+	padding-bottom: 24px;
+}
+
+.UserAnalysisPage_HashTagRate {
+	font-size: 17px;
+	font-weight: 700;
+	-webkit-letter-spacing: -0.5px;
+	-moz-letter-spacing: -0.5px;
+	-ms-letter-spacing: -0.5px;
+	letter-spacing: -0.5px;
+	line-height: normal !important;
+	text-align: center;
+	margin: 12px 0 4px;
+	color: #ff2f6e;
+}
+
+.HashTagCloud {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
+.InnerPartOfListWithImage_A {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	color: inherit;
+	text-decoration: none;
+	height: 76px;
+	cursor: pointer;
+	background-color: transparent;
+	text-align: -webkit-match-parent;
+	list-style: none;
+}
+
+.InnerPartOfListWithImage_ImageBlock {
+	color: inherit;
+	cursor: pointer;
+}
+
+.ProfilePhoto {
+	display: flex;
+	position: relative;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+	width: 56px;
+	height: 56px;
+	overflow: hidden;
+	margin: 0 12px 0 0;
+	border: solid 1px rgba(0, 0, 0, 0.08);
+	border-radius: 50%;
+	color: inherit;
+}
+
+.ProfilePhoto_Default {
+	display: flex;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+	background: #f8f8f8;
+	width: 100%;
+	height: 100%;
+	color: inherit;
+}
+
+.defaultImage_Profile {
+	vertical-align: top;
+	width: 24px;
+	height: 24px;
+	border-style: none;
+	color: inherit;
+}
+
+.ProfilePhoto_Img {
+	position: relative;
+	z-index: 1;
+	background:
+		url(https://d19zyxn02q3dj8.cloudfront.net/people/medium/9a9a99d….jpg?1531393963)
+		no-repeat center;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+}
+
+.InnerPartOfListWithImage_Info {
+	display: flex;
+	flex: 1;
+	-webkit-box-align: center;
+	align-items: center;
+	box-sizing: border-box;
+	height: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: left;
+}
+
+.InnerPartOfListWithImage_Info_NoLine {
+	display: flex;
+	flex: 1;
+	-webkit-box-align: center;
+	align-items: center;
+	box-sizing: border-box;
+	height: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.InnerPartOfListWithImage_Title {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	-webkit-box-pack: center;
+	justify-content: center;
+	padding: 0 10px 0 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.ListItemWithProfilePhoto_Title {
+	font-size: 17px;
+	font-weight: 400;
+	letter-spacing: -0.7px;
+	line-height: 22px;
+	color: #1e1e1e;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.ListItemWithProfilePhoto_Subtitle {
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: -0.3px;
+	line-height: 19px;
+	color: #8c8c8c;
+	white-space: nowrap;
+	margin-top: 2px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.wordCloudImage{
+	width: 100%;
+    height: 100%;
+}

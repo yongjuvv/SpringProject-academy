@@ -1,0 +1,123 @@
+package com.ch.project.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.ch.project.model.Movie;
+import com.ch.project.model.Review;
+
+@Repository
+public class ReviewDaoImpl implements ReviewDao {
+	
+	@Autowired
+	private SqlSessionTemplate sst;
+
+	@Override
+	public Review selectMovReview(String email, int movNum) {
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		hm.put("email", email);
+		hm.put("movNum", movNum);
+		return sst.selectOne("reviewns.selectMovReview", hm);
+	}
+
+	@Override
+	public Review selectTvReview(String email, int tvNum) {
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		hm.put("email", email);
+		hm.put("tvNum", tvNum);
+		return sst.selectOne("reviewns.selectTvReview", hm);
+	}
+
+	@Override
+	public int movInsertNoSpoiler(Review review) {
+		return sst.insert("reviewns.movInsertNoSpoiler", review);
+	}
+
+	@Override
+	public int movInsertSpoiler(Review review) {
+		return sst.insert("reviewns.movInsertSpoiler", review);
+	}
+
+	@Override
+	public int insertTvReviewNoSpoiler(Review review) {
+		return sst.insert("reviewns.insertTvReviewNoSpoiler", review);
+	}
+
+	@Override
+	public int insertTvReviewSpoiler(Review review) {
+		return sst.insert("reviewns.insertTvReviewSpoiler", review);
+	}
+	
+	// 페이징 작업
+	@Override
+	public List<Review> list(String email, int startRow, int endRow) {
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		hm.put("email", email);
+		hm.put("startRow", startRow);
+		hm.put("endRow", endRow);
+		return sst.selectList("reviewns.list", hm);
+	}
+
+	@Override
+	public int total(String email) {
+		return sst.selectOne("reviewns.total", email);
+	}
+
+	@Override
+	public List<Review> list2(String email, int startRow, int endRow) {
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		hm.put("email", email);
+		hm.put("startRow", startRow);
+		hm.put("endRow", endRow);
+		return sst.selectList("reviewns.list2", hm);
+	}
+
+	@Override
+	public List<Review> hashMoList(int hashNum) {
+		return sst.selectList("reviewns.hashMoList",hashNum);
+	}
+
+
+	@Override
+	public List<Review> hashTvList(int hashNum) {
+		return sst.selectList("reviewns.hashTvList",hashNum);
+
+	}
+
+	@Override
+	public int movUpdateNoSpoiler(Review review) {
+		return sst.update("reviewns.movUpdateNoSpoiler", review);
+	}
+
+	@Override
+	public int movUpdateSpoiler(Review review) {
+		return sst.update("reviewns.movUpdateSpoiler", review);
+	}
+
+	@Override
+	public int movDelete(Review review) {
+		return sst.delete("reviewns.movDelete", review);
+	}
+
+	@Override
+	public int movDelete2(String email, int movNum) {
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		return sst.delete("reviewns.movDelete2", hm);
+	}
+
+	@Override
+	public List<Review> movieReviewList(int movNum) {
+		return sst.selectList("reviewns.movieReviewList", movNum);
+	}
+
+	@Override
+	public List<Review> tvReviewList(int tvNum) {
+		return sst.selectList("reviewns.tvReviewList", tvNum);
+	}
+
+
+}

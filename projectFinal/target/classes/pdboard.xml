@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pdboardns">
+	<insert id="insert" parameterType="pdboard">
+		insert into pj_order values(#{or_num},sysdate,#{or_totalcost},#{},#{},#{})
+	</insert>
+</mapper>

@@ -1,0 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../taglib.jsp"%>
+<%@ include file="../header.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원 탈퇴</title>
+<script type="text/javascript">
+	function passChk() {
+		var pass = $('#pass').val();
+		var rtn = "";
+		$.ajax({
+			data : {
+				pass : pass
+			},
+			url : "passChk.do",
+			async : false,
+			success : function(data) {
+				if (data == '0') {
+					$('#passCk').text("올바른 비밀번호를 입력해 주세요");
+					rtn = false;
+				} else if (data == '1') {
+					/* $('#passCk').text("올바른 비밀번호");
+					 */
+					rtn = true;
+				}
+			},
+			error : function(data) {
+				$('#passCk').text("error");
+			}
+		});
+		return rtn;
+	}
+</script>
+</head>
+<body>
+<div class="container" align="center">
+	<h4>탈퇴하기 전, 비밀번호를 확인합니다</h4>
+	<form action="memDelForm2.do" name="frm" method="post" onsubmit="return passChk()">
+		<table class="table">
+			<tr>
+				<td>
+					<input type="password" name="pass" required="required"
+					id="pass" class="form-control" maxlength="15">
+					<div class="err" id="passCk"></div>
+				</td>
+			</tr>
+			<tr>
+				<td align="center"><input type="submit" value="다음 단계로" class="btn"></td>
+		</table>
+	</form>
+</div>
+</body>
+</html>

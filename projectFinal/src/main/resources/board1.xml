@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board1ns">
+<!--<select id="list" parameterType="map" resultType="board">
+		select * from 
+		    (select rownum rn, a.* from 
+		        (select * from board order by b_num desc) a)
+		            where rn between #{startRow} and #{endRow}
+	</select> -->
+	<select id="boardList" parameterType="pj_Board" resultType="pj_Board">
+		select * from 
+		    (select rownum rn, a.* from 
+		        (select * from pj_Board 
+		        <where>      <!-- $는 변수 #은 값 -->
+					<if test="boardKeyword!=null and boardKeyword!=''">
+						<if test="boardSearch!='subcon'">
+							${boardSearch} like '%'||#{boardKeyword}||'%'
+						</if>
+						<if test="boardSearch=='subcon'">
+							b_subject like '%'||#{boardKeyword}||'%' or b_content like '%'||#{boardKeyword}||'%'
+						</if>
+					</if>   
+		        </where>		        
+		        <!--  order by ref desc, re_step-->) a) where rn between #{boardStartRow} and #{boardEndRow}
+	</select>
+	<select id="boardGetToal" parameterType="pj_Board" resultType="integer">
+		select count(*) from pj_Board
+		 <where>      <!-- $는 변수 #은 값 -->
+				<if test="boardKeyword!=null and boardKeyword!=''">
+					<if test="boardSearch!='subcon'">
+						${boardSearch} like '%'||#{boardKeyword}||'%'
+					</if>
+					<if test="boardSearch=='subcon'">
+						b_subject like '%'||#{boardKeyword}||'%' or b_content like '%'||#{boardKeyword}||'%'
+					</if>
+				</if>   
+  		</where>
+	</select>
+	<select id="boardSelect" parameterType="integer" resultType="pj_Board">
+		select * from pj_Board where b_num=#{b_num}
+	</select>
+	<insert id="boardInsert" parameterType="pj_Board">
+		<!-- 처음 입력할 때는 b_num과 ref가 같다 -->
+		insert into pj_Board values(#{b_num},#{id},#{b_subject},#{b_content},0,#{b_ip},sysdate,'n')
+	</insert>
+	<update id="boardUpdateReadCount" parameterType="integer">
+		update pj_Board set b_readcount = b_readcount + 1 where b_num=#{b_num}
+	</update>
+	<update id="boardUpdate" parameterType="pj_Board">
+		update pj_Board set b_subject=#{b_subject},b_content=#{b_content} where b_num=#{b_num}
+	</update>
+	<delete id="boardDelete" parameterType="integer">
+		delete from pj_Board where b_num=#{b_num}
+	</delete>
+	<select id="boardMaxNum" resultType="integer">
+		select nvl(max(b_num),0) + 1 from pj_Board
+	</select>
+	<!--  
+	<update id="updateStep" parameterType="board">
+		update board set re_step=re_step+1
+		where ref=#{ref} and re_step > #{re_step}
+	</update>
+	-->
+</mapper>

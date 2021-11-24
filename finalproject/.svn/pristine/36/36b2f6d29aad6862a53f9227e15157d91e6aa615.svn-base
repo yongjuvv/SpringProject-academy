@@ -1,0 +1,80 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../taglib.jsp"%>
+<%@ include file="../header.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>${hashtag1.hashName}</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+
+	<section class="hashName">
+		<table>
+			<tr>
+				<th>
+					<p>
+					다른 사용자들이 선택한<br>
+					<span id="selectedhash">#${hashtag1.hashName}</span><br>
+					해시태그가 상위권으로 랭크된 영화입니다
+					</p>
+				</th>
+			</tr>
+		</table>
+	</section>
+
+	<section class="movielist">
+		<table>
+		<h2>--영화리스트--</h2>
+			<c:forEach var="review" items="${hashMoList}">
+				<tr>
+					<td width="40%" align="right">
+						<a href="movSearchResult.do?movNum=${review.movNum}">
+						<img
+							alt="이미지"
+							src="<%=request.getContextPath()%>/images/${review.movPic}"
+							width="80" height="120"></a>
+					</td>
+					<td align="left" valign="top">
+						<a href="movSearchResult.do?movNum=${review.movNum}">
+						<span id="movName">
+						${review.movName}
+						</span>
+						<br>
+						<fmt:formatDate value="${review.movDate}" pattern="yyyy" />
+						</a>
+					</td>
+			</c:forEach>
+		</table>
+	</section> 
+
+	 <section class="tvlist">
+		<table>
+		<h2>--영상리스트--</h2>
+			<c:forEach var="review" items="${hashTvList}">
+				<tr>
+					<td width="40%" align="right">
+						<a href="tvSearchResult.do?tvNum=${review.tvNum}">
+						<img
+							alt="이미지"
+							src="<%=request.getContextPath()%>/images/${review.tvPic}"
+							width="80" height="120"></a>
+					</td>
+					<td align="left" valign="top">
+						<a href="tvSearchResult.do?tvNum=${review.tvNum}">
+						<span id="tvName">
+						${review.tvName}
+						</span>
+						<br>
+						<fmt:formatDate value="${review.tvDate}" pattern="yyyy" />
+						</a>
+					</td>
+			</c:forEach>
+		</table>
+	</section> 
+</body>
+</html>
+<%@ include file="../footer.jsp"%>

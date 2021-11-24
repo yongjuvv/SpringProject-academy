@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config
+3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="movie" 		type="com.ch.project.model.Movie" />
+		<typeAlias alias="pmember" 		type="com.ch.project.model.PMember" />
+		<typeAlias alias="tv" 			type="com.ch.project.model.Tv" />
+		<typeAlias alias="review" 		type="com.ch.project.model.Review" />
+		<typeAlias alias="hashtag" 		type="com.ch.project.model.Hashtag" />
+		<typeAlias alias="pcharge" 		type="com.ch.project.model.PCharge" />
+		<typeAlias alias="pproduct" 	type="com.ch.project.model.PProduct" />
+		<typeAlias alias="banklist" 	type="com.ch.project.model.BankList" />
+		<typeAlias alias="person" 		type="com.ch.project.model.Person" />
+		<typeAlias alias="pay" 			type="com.ch.project.model.Pay" />
+		<typeAlias alias="coreply" 		type="com.ch.project.model.CoReply" />
+		<typeAlias alias="like" 		type="com.ch.project.model.Like" />
+		<typeAlias alias="tvep" 		type="com.ch.project.model.TvEp" />
+		<typeAlias alias="collect" 		type="com.ch.project.model.Collect" />
+		<typeAlias alias="collvideo" 		type="com.ch.project.model.CollVideo" />
+	</typeAliases>
+	<mappers>
+		<mapper resource="movie.xml" />
+		<mapper resource="pmember.xml" />
+		<mapper resource="tv.xml" />
+		<mapper resource="review.xml" />
+		<mapper resource="hashtag.xml" />
+		<mapper resource="pcharge.xml" />
+		<mapper resource="pproduct.xml" />
+		<mapper resource="banklist.xml" />
+		<mapper resource="person.xml" />
+	 	<mapper resource="pay.xml" />
+	 	<mapper resource="coreply.xml" />
+	 	<mapper resource="like.xml" />
+	 	<mapper resource="tvep.xml" />
+	 	<mapper resource="collect.xml" />
+	 	<mapper resource="collvideo.xml" />
+	</mappers>
+</configuration>

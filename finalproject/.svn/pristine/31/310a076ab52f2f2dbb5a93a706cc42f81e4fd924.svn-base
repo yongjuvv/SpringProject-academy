@@ -1,0 +1,49 @@
+select * from movie1;
+select * from tv1;
+select * from pmember1;
+select * from review1;
+select * from hashtag1;
+select * from pCharge1;
+select * from pProduct1;
+select * from movPay1;
+select * from tv1;
+
+select * from PERSON1;
+SELECT * FROM (SELECT A.*, ROWNUM RN
+			FROM (SELECT R.MOVNUM, REVIEWDATE, MOVNAME, REVIEWCOMM, REVIEWDEL, HASHNUM1, HASHNUM2, HASHNUM3
+				FROM REVIEW1 R, MOVIE1 M
+				WHERE R.MOVNUM = M.MOVNUM AND EMAIL='tree@hash.tag' ORDER BY REVIEWDATE DESC) A)
+				WHERE RN BETWEEN 1 AND 5
+
+
+--전체 테이블 조회
+select * from tab;
+
+select * from
+	(select e.movNum, writeDate, movNameKo, myComm, commDel, hashNum1, hashNum2, hashNum3, rowNum rn
+	from exmovie e, movie m
+	where e.movNum = m.movNum and email='sky@hash.tag')
+where (rn between 1 and 5) and commDel = 'n' order by writeDate desc;
+
+select count(*) from exmovie where email='sky@hash.tag' and myComm is not null;
+select p.email, myComm from exmovie e, pmember p where e.email = p.email and movNum=2 and memDel = 'n';
+select p.email, myComm, memName from exmovie e, pmember p where e.email = p.email and movNum=2;
+select email, myComm from exmovie e where movNum=2;
+select * from exmovie e, pmember p where e.email=p.email;
+select * from pmember;
+select count(*) from pmember;
+select * from exmovie;
+
+select * from exMovie e, movie m where e.movNum=m.movNum;
+select * from exMovie e, movie m where e.movNum=m.movNum and memNum=1;
+
+select * from (select e.movNum, writeDate, movNameKo, myComm, commDel, hashNum1, hashNum2, hashNum3, rowNum rn
+from exmovie e, movie m where e.movNum = m.movNum and email='white@hash.tag' order by writeDate desc)
+where (rn between 1 and 5) and commDel = 'n';
+
+select count(*) from (select hashNum, count(*) "c" from 
+(select hashNum, hashName from hashtag h, exmovie e
+where (h.hashNum=e.hashNum1 or h.hashNum=e.hashNum2 or h.hashNum=e.hashNum3))
+group by hashNum);
+
+select hashName from hashtag where hashNum = 1001;

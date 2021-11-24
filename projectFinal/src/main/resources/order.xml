@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderns">
+	<select id="select" parameterType="integer" resultType="order">
+		select * from pj_order where orNumber=#{orNumber}
+	</select>
+	
+	<insert id="insert" parameterType="order">	
+		insert into pj_order values(#{orNumber.value},#{or_name},sysdate,#{or_totalCost.value},'상품 준비중',#{or_deliveryLocation},#{or_buyType},#{or_color},#{or_count},#{id})
+	</insert>
+	
+	<select id="selectid" parameterType="string" resultType="order">
+		select * from pj_order where id=#{id}
+	</select>
+</mapper>

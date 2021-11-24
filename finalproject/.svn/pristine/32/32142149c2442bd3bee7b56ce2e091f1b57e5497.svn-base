@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tvns">
+	<resultMap type="tv" id="tvResult">
+		<result property="tvNum" column="tvNum" />
+		<result property="tvName" column="tvName" />
+		<result property="tvDirNum" column="tvDirNum" />
+		<result property="tvDate" column="tvDate" />
+		<result property="channel" column="channel" />
+		<result property="tvGrade" column="tvGrade" />
+		<result property="tvPic" column="tvPic" />
+		<result property="tvDesc" column="tvDesc" />
+		<result property="tvPrice" column="tvPrice" />
+		<result property="totEp" column="totEp" />
+		<result property="tvGenre" column="tvGenre" />
+		<result property="actNum1" column="actNum1" />
+		<result property="actNum2" column="actNum2" />
+		<result property="actNum3" column="actNum3" />
+		<result property="actNum4" column="actNum4" />
+		<result property="actNum5" column="actNum5" />
+		<result property="actNum6" column="actNum6" />
+		<result property="actNum7" column="actNum7" />
+	</resultMap>
+	<!-- tv상세페이지 -->
+	<select id="select" parameterType="int" resultType="tv">
+		select * from tv1 where tvNum = #{tvNum}
+	</select>
+	<!-- searchResult tv부분 -->
+	<select id="tvList" parameterType="tv" resultMap="tvResult">
+		select tv1.* from (select tvNum from (select tvNum from (select personNum from person1 where personName like '%'||#{search}||'%' or replace(personName, ' ','') like '%'||#{search}||'%'), tv1 
+  		where tvDirNum=personNum or actNum1 = personNum or actNum2 = personNum or actNum3 = personNum or actNum4 = personNum or actNum5 = personNum or actNum6 = personNum or actNum7 = personNum union all
+  		select tvNum from tv1 where tvName like '%'||#{search}||'%' or replace(tvName, ' ','') like '%'||#{search}||'%') group by tvNum)a, tv1 where tv1.tvNum=a.tvNum
+	</select>
+	
+</mapper>

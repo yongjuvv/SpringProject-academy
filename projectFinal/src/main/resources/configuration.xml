@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+<typeAliases>
+
+<typeAlias type="com.ch.project.model.Member" alias="member"/>
+
+<typeAlias type="com.ch.project.model.Pet" alias="pet"/>
+
+<typeAlias type="com.ch.project.model.HelpBoard" alias="board"/>
+
+<typeAlias type="com.ch.project.model.ProductBoard" alias="pdboard"/>
+
+<typeAlias alias="pj_Board" type="com.ch.project.model.pj_Board"/>
+
+<typeAlias alias="rbd" type="com.ch.project.model.ReplyBoard"/>
+
+<typeAlias type="com.ch.project.model.ReplyProductBoard" alias="rpdboard"/>
+
+<typeAlias type="com.ch.project.model.petHealth" alias="petHealth"/>
+
+<typeAlias type="com.ch.project.model.Product" alias="product"/>
+
+<typeAlias type="com.ch.project.model.Order" alias="order"/>
+
+</typeAliases>
+
+
+<mappers>
+
+<mapper resource="gonow.xml"/>
+
+<mapper resource="member.xml"/>
+
+<mapper resource="mypage.xml"/>
+
+<mapper resource="board.xml"/>
+
+<mapper resource="pdboard.xml"/>
+
+<mapper   resource="board1.xml" />
+
+<mapper   resource="rbd.xml" />
+
+<mapper resource="rpdboard.xml"/>
+
+<mapper resource="product.xml"/>
+
+<mapper resource="order.xml"/>
+
+<mapper resource="board1.xml"/>
+
+<mapper resource="pet.xml"/>
+
+
+</mappers>
+
+</configuration>

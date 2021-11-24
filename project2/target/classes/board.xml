@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardns">
+<!-- 	<select id="list" parameterType="map" resultType="board">
+		select * from 
+		    (select rownum rn, a.* from 
+		        (select * from board order by num desc) a)
+		            where rn between #{startRow} and #{endRow}
+	</select> -->
+	<select id="list" parameterType="board" resultType="board">
+		select * from 
+		    (select rownum rn, a.* from 
+		        (select * from pj_helpboard 
+		        <!-- $는 변수 #은 값 -->
+		        <where>      
+					<if test="keyword!=null and keyword!=''">
+						<if test="search!='subcon'">
+							${search} like '%'||#{keyword}||'%'
+						</if>
+						<if test="search=='subcon'">
+							hb_subject like '%'||#{keyword}||'%' or
+							hb_content like '%'||#{keyword}||'%'
+						</if>
+					</if>   
+		        </where>		        
+		        order by hb_ref desc, hb_re_step) a)
+		            where rn between #{startRow} and #{endRow}
+	</select>
+	<select id="getTotal" parameterType="board" resultType="integer">
+		select count(*) from pj_helpboard
+		 <where>      <!-- $는 변수 #은 값 -->
+				<if test="keyword!=null and keyword!=''">
+					<if test="search!='subcon'">
+						${search} like '%'||#{keyword}||'%'
+					</if>
+					<if test="search=='subcon'">
+						hb_subject like '%'||#{keyword}||'%' or
+						hb_content like '%'||#{keyword}||'%'
+					</if>
+				</if>   
+  		</where>
+	</select>
+	<select id="select" parameterType="integer" resultType="board">
+		select * from pj_helpboard where hb_number=#{hb_number}
+	</select>
+	<insert id="insert" parameterType="board">
+		<!-- num값에 1부터 1씨 증가하여 대입 -->
+<!-- 	<selectKey keyProperty="num" order="BEFORE" resultType="integer">
+			select nvl(max(num),0) + 1 from board
+		</selectKey> -->
+		<!-- 처음 입력할 때는 num과 ref가 같다 -->
+		insert into pj_helpboard values(#{id},#{hb_writer}, #{hb_number},#{hb_subject},
+			#{hb_content},0,#{hb_ref},#{hb_re_step},
+			#{hb_re_level},sysdate,'n')
+	</insert>
+	<update id="updateReadCount" parameterType="integer">
+		update pj_helpboard set hb_readcount = hb_readcount + 1 where hb_number=#{hb_number}
+	</update>
+	<update id="update" parameterType="board">
+		update pj_helpboard set hb_subject=#{hb_subject}, hb_content=#{hb_content} where hb_number=#{hb_number}
+	</update>
+	<update id="delete" parameterType="integer">
+		update pj_helpboard set hb_del='y' where hb_number=#{hb_number}
+	</update>
+	<select id="maxNum" resultType="integer">
+		select nvl(max(hb_number),0) + 1 from pj_helpboard
+	</select>
+	<update id="updateStep" parameterType="board">
+		update pj_helpboard set hb_re_step=hb_re_step+1 
+			where hb_ref=#{hb_ref} and hb_re_step > #{hb_re_step}
+	</update>
+</mapper>

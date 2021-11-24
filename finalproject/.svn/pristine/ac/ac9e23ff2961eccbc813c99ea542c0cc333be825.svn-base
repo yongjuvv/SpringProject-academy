@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="mainHeader.jsp"%>
+
+<!-- 검색창 -->
+<div class="container" align="center">
+	<form action="searchResult.do">
+		<input type="text" class="form-control" name="search"
+			placeholder="작품 제목, 배우, 감독을 검색해보세요." style="width: 270px;">
+	</form>
+</div>
+
+<!-- 해시태그 랜덤 리스트 -->
+<div class="container" align="center">
+	<c:if test="${not empty list }">
+		<c:forEach var="hashtag" items="${list }">
+			<a href="hashtagResult.do?hashNum=${hashtag.hashNum}">
+				#${hashtag.hashName} </a>
+		</c:forEach>
+	</c:if>
+	<form id="button">
+		<input type="button" onclick="window.location.reload()" value="↺" />
+	</form>
+</div>
+
+<a href="faList.do?">추천리스트</a>
+
+<%@ include file="footer.jsp"%>

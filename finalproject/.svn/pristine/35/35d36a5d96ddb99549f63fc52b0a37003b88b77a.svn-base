@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../taglib.jsp"%>
+<%@ include file="../header.jsp"%>
+<%@ include file="../sessionChk.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>확인</title>
+</head>
+<body>
+	<div class="container" align="center">
+		<form action="reviewDelete.do?reviewNum=${review.reviewNum}&pageNum=${pageNum}" method="post">
+			<input type="hidden" value="${review.reviewNum }"> <input
+				type="hidden" value="${pageNum }">
+			<table>
+				<tr>
+					<td colspan="2">
+							리뷰를 삭제하시겠어요?<br> 한번 삭제 된 리뷰는 복구할 수 없어요.
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<input type="button" class="btn btn-default" onclick="history.go(-1)" value="아니 실수야">
+					<input type="submit" class="btn btn-danger" value="네 삭제할래요">
+					</td>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

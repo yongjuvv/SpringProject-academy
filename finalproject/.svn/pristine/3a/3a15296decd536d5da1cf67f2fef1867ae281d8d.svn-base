@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reviewns">
+	<resultMap type="review" id="reviewResult">
+		<result property="reviewNum" column="reviewNum" />
+		<result property="email" column="email" />
+		<result property="movNum" column="movNum" />
+		<result property="tvNum" column="tvNum" />
+		<result property="hashNum1" column="hashNum1" />
+		<result property="hashNum2" column="hashNum2" />
+		<result property="hashNum3" column="hashNum3" />
+		<result property="reviewComm" column="reviewComm" />
+		<result property="reviewDate" column="reviewDate" />
+		<result property="reviewUpdate" column="reviewUpdate" />
+		<result property="reviewDel" column="reviewDel" />
+		<result property="reviewSpoiler" column="reviewSpoiler" />
+		<result property="reviewRate" column="reviewRate" />
+		<result property="reviewLike" column="reviewLike" />
+		<result property="hashName1" column="hashName1" />
+		<result property="hashName2" column="hashName2" />
+		<result property="hashName3" column="hashName3" />
+		<result property="movName" column="movName" />
+		<result property="tvName" column="tvName" />
+		<result property="nickName" column="nickName" />
+		<result property="movPic" column="movPic" />
+		<result property="tvPic" column="tvPic" />
+		<result property="movDate" column="movDate" />
+		<result property="tvDate" column="tvDate" />
+		<result property="tvName" column="tvName" />
+	</resultMap>
+	
+	<!-- 영화 리뷰가 있는지 검색 -->
+	<select id="selectMovReview" parameterType="review" resultType="review">
+	select * from review1 where movNum=#{movNum} and email=#{email}
+	</select>
+	
+	<!-- tv 리뷰가 있는지 검색 -->
+	<select id="selectTvReview" parameterType="review" resultType="review">
+	select * from review1 where tvNum=#{tvNum} and email=#{email}
+	</select>
+	
+	<!-- 스포일러 없는 리뷰 등록 -->
+	<insert id="insertReview" parameterType="review">
+		<selectKey keyProperty="reviewNum" order="BEFORE" resultType="int">
+		select nvl(max(reviewNum), 0) + 1 reviewNum from review1
+		</selectKey>
+		<if test="tvNum 값이 없을 때">
+		insert into review1 values (#{reviewNum}, #{email}, #{movNum}, 0,
+		#{hashNum1}, #{hashNum2}, #{hashNum3}, #{reviewComm},
+		sysdate, sysdate, 'n', 'n', 0, 0)
+		</if>
+		<if test="movNum 값이 없을 때">
+		insert into review1 values (#{reviewNum}, #{email}, 0, #{tvNum},
+		#{hashNum1}, #{hashNum2}, #{hashNum3}, #{reviewComm},
+		sysdate, sysdate, 'n', 'n', 0, 0)
+		</if>
+	</insert>
+	
+	<!-- 영화 리뷰 등록 (스포 X) -->
+	<insert id="movInsertNoSpoiler" parameterType="review">
+		<selectKey keyProperty="reviewNum" order="BEFORE" resultType="int">
+		select nvl(max(reviewNum), 0) + 1 reviewNum from review1
+		</selectKey>
+	INSERT INTO REVIEW1 VALUES (
+	#{reviewNum}, #{email}, #{movNum}, 0, #{hashNum1}, #{hashNum2}, #{hashNum3}, #{reviewComm},
+	sysdate, sysdate, 'n', 'n', 0, 0)
+	</insert>
+	
+	<!-- 영화 리뷰 등록 (스포 O) -->
+	<insert id="movInsertSpoiler" parameterType="review">
+		<selectKey keyProperty="reviewNum" order="BEFORE" resultType="int">
+		select nvl(max(reviewNum), 0) + 1 reviewNum from review1
+		</selectKey>
+	insert into review1 values (#{reviewNum}, #{email}, #{movNum}, 0,
+	#{hashNum1}, #{hashNum2}, #{hashNum3}, #{reviewComm}, sysdate, sysdate, 'n', 'y', 0, 0)
+	</insert>
+	
+	<!-- 해시태그에 따른 영화 리스트 -->
+	<select id="hashMoList" parameterType="int" resultMap="reviewResult">
+		select a.movNum, movName, movPic, movDate  from
+  		(select movNum, count(*) c  from
+  		(select hashNum, r.movNum, hashName from hashtag1 h, review1 r 
+  		where (h.hashNum=r.hashNum1 or h.hashNum=r.hashNum2 or h.hashNum=r.hashNum3)
+  		and hashNum=#{hashNum}) group by movNum order by c desc) a,
+  		movie1 m where a.movNum = m.movNum
+	</select>
+	
+	<!-- 해시태그에 따른 영상 리스트 -->
+	<select id="hashTvList" parameterType="int" resultMap="reviewResult">
+		select a.tvNum, tvName, tvPic, tvDate from
+  		(select tvNum, count(*) c  from
+  		(select hashNum, r.tvNum, hashName from hashtag1 h, review1 r 
+  		where (h.hashNum=r.hashNum1 or h.hashNum=r.hashNum2 or h.hashNum=r.hashNum3)
+  		and hashNum=#{hashNum}) group by tvNum order by c desc) a,
+  		tv1 t where a.tvNum = t.tvNum
+	</select>	
+	
+	<!-- tv 리뷰 등록 (스포 X) -->
+	<insert id="insertTvReviewNoSpoiler" parameterType="review">
+		<selectKey keyProperty="reviewNum" order="BEFORE" resultType="int">
+		select nvl(max(reviewNum), 0) + 1 reviewNum from review1
+		</selectKey>
+	insert into review1 values (#{reviewNum}, #{email}, 0, #{tvNum},
+	#{hashNum1}, #{hashNum2}, #{hashNum3}, #{reviewComm}, sysdate, sysdate, 'n', 'n', 0, 0)
+	</insert>
+	
+	<!-- tv 리뷰 등록 (스포 O) -->
+	<insert id="insertTvReviewSpoiler" parameterType="review">
+		<selectKey keyProperty="reviewNum" order="BEFORE" resultType="int">
+		select nvl(max(reviewNum), 0) + 1 reviewNum from review1
+		</selectKey>
+	insert into review1 values (#{reviewNum}, #{email}, 0, #{tvNum},
+	#{hashNum1}, #{hashNum2}, #{hashNum3}, #{reviewComm}, sysdate, sysdate, 'n', 'y', 0, 0)
+	</insert>
+	
+	<!-- 리뷰 전체 목록 -->
+	<select id="list" parameterType="string" resultType="review">
+	select * from (select a.*, rowNum rn
+		from (
+			<if test="movNum !=null">
+			select r.movNum, reviewDate, movName, reviewComm, reviewDel, hashNum1, hashNum2, hashNum3
+	 		from review1 r, movie1 m 
+	 		where r.movNum = m.movNum and email=#{email}
+	 		</if>
+<!-- 	 		<if test="tvNum !=null">
+			select r.tvNum, reviewDate, tvName, reviewComm, reviewDel, hashNum1, hashNum2, hashNum3
+	 		from review1 r, tv1 t 
+	 		where r.movNum = t.tvNum and email=#{email}
+	 		</if> -->
+	 		order by reviewDate desc) a)
+	 	where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<!-- 페이징 작업을 위한 리뷰 총 갯수 -->
+	<select id="total" parameterType="string" resultType="int">
+	select count(*) from review1 where email=#{email}
+	</select>
+	
+	<select id="list2" parameterType="string" resultType="review">
+	select * from (select a.*, rowNum rn from (
+	select * from (select r.movNum, movName, null tvName, tvNum, reviewDate, reviewComm, hashNum1, hashNum2, hashNum3 from review1 r, movie1 m where email=#{email} and r.movNum=m.movNum
+	union
+	select movNum, null, tvName, review1.tvNum, reviewDate, reviewComm, hashNum1, hashNum2, hashNum3 from review1, tv1 where email=#{email} and review1.tvNum=tv1.tvNum) order by reviewDate)a) where (rn between #{startRow} and #{endRow})
+
+	</select>
+	
+	<!-- 영화 리뷰 수정 (스포X) -->
+	<update id="movUpdateNoSpoiler" parameterType="review">
+	update review1 set
+		reviewComm=#{reviewComm},
+		hashNum1 = #{hashNum1},
+		hashNum2 = #{hashNum2},
+		hashNum3 = #{hashNum3},
+		reviewSpoiler='n',
+		reviewUpdate = sysdate
+		where movNum=#{movNum} and email=#{email}
+	</update>
+	
+	<!-- 영화 리뷰 수정 (스포O) -->
+	<update id="movUpdateSpoiler" parameterType="review">
+	update review1 set
+		reviewComm=#{reviewComm},
+		hashNum1 = #{hashNum1},
+		hashNum2 = #{hashNum2},
+		hashNum3 = #{hashNum3},
+		reviewSpoiler='y',
+		reviewUpdate = sysdate
+		where movNum=#{movNum} and email=#{email}
+	</update>
+
+	<delete id="movDelete" parameterType="review">
+		delete from review1 where movNum=#{movNum} and email=#{email}
+	</delete>
+	
+	<delete id="movDelete2" parameterType="review">
+		delete from review1 where movNum=#{movNum} and email=#{email}
+	</delete>
+	<!-- 영화 상세페이지 리뷰목록 -->
+	<select id="movieReviewList" parameterType="int" resultMap="reviewResult">
+		select review1.*, nickName from review1, pmember1 where review1.email=pmember1.email and movNum=#{movNum}
+	</select>
+	<select id="tvReviewList" parameterType="int" resultMap="reviewResult">
+		select review1.*, nickName from review1, pmember1 where review1.email=pmember1.email and tvNum=#{tvNum}
+	</select>
+</mapper>

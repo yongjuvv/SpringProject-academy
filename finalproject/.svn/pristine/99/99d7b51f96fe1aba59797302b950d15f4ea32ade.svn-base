@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="taglib.jsp"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>해시태그로 찾는 인생영화</title>
+<style type="text/css">
+.navbar {
+	padding-top: 10px;
+}
+
+body {
+	padding-top: 100px;
+	background-color: #f8f8f8;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="searchForm.do">#해시태그</a>
+				</div>
+				<div class="navbar-form navbar-left">
+					<form action="searchResult.do">
+						<input type="text" class="form-control" name="search"
+							placeholder="작품 제목, 배우, 감독을 검색해보세요."
+							style="width: 270px;">
+					</form>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<% if (session.getAttribute("email") == null) { %>
+					<li>
+						<button class="btn btn-default navbar-btn" onclick="location.href='loginForm.do'">로그인</button>
+					</li>
+					<li>
+						<button class="btn btn-default navbar-btn" onclick="location.href='joinForm.do'">회원가입</button>
+					</li>
+					<%} else if (session.getAttribute("email") != null) {%>
+					<li>
+						<button class="btn btn-default navbar-btn" onclick="location.href='logout.do'">로그아웃</button>
+					</li>
+					<li>
+						<a href="myPage.do">
+						<img alt="" src="https://2.bp.blogspot.com/-G0w5y_ViMG4/XDwpVaZBTCI/AAAAAAAAAAM/HtJC_DWav9cT1r0Hch87X0Xmy9YoymLsACLcBGAs/s1600/user.png" width="60px"></a>
+					</li>
+					<%} %>
+				</ul>
+			</div>
+		</nav>
+	</div>

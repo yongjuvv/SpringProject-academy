@@ -1,0 +1,28 @@
+.white_content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5); /* rgba(빨강, 초록, 파랑, 투명도) */
+    opacity:0;
+    -webkit-transition: opacity;
+    -moz-transition: opacity;
+    transition: opacity;
+    pointer-events: none;
+}
+.white_content:target {
+    opacity:1;
+    pointer-events: auto;
+}
+.white_content > div {
+	position: absolute;
+	top: 10%;
+	left: 20%;
+	width: 60%;
+	height: 80%;
+	padding: 16px;
+	background-color: white;
+	overflow: auto;
+	border-radius: 10px;	
+}

@@ -1,0 +1,25 @@
+package com.ch.project.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.ch.project.model.Movie;
+
+@Repository
+public class MovieDaoImpl implements MovieDao{
+	@Autowired
+	private SqlSessionTemplate sst;
+
+	@Override
+	public Movie select(int movNum) {
+		return sst.selectOne("moviens.select", movNum);
+	}
+	@Override
+	public List<Movie> movieList(Movie movie) {
+		return sst.selectList("moviens.movieList", movie);
+	
+	}
+}

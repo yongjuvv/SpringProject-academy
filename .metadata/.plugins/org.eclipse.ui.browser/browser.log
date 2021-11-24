@@ -1,0 +1,49 @@
+
+11월 13, 2020 19:54:18.649 NEW SESSION
+11월 13, 2020 19:54:18.649 [1113/195418.623:ERROR:directory_reader_win.cc(43)] FindFirstFile: 지정된 경로를 찾을 수 없습니다. (0x3)
+
+11월 16, 2020 18:23:10.202 NEW SESSION
+11월 16, 2020 18:23:10.202 [1116/182310.197:ERROR:directory_reader_win.cc(43)] FindFirstFile: 지정된 경로를 찾을 수 없습니다. (0x3)
+11월 16, 2020 19:04:03.827 [1116/190403.825:ERROR:directory_reader_win.cc(43)] FindFirstFile: 지정된 경로를 찾을 수 없습니다. (0x3)
+
+11월 17, 2020 19:19:28.104 NEW SESSION
+11월 17, 2020 19:19:28.104 [1117/191928.098:ERROR:directory_reader_win.cc(43)] FindFirstFile: 지정된 경로를 찾을 수 없습니다. (0x3)
+
+11월 18, 2020 16:52:39.973 NEW SESSION
+11월 18, 2020 16:52:39.974 [1118/165239.959:ERROR:directory_reader_win.cc(43)] FindFirstFile: 지정된 경로를 찾을 수 없습니다. (0x3)
+11월 18, 2020 21:15:45.324 [14656:7380:1118/211545.324:ERROR:socket_stream.cc(219)] Closing stream with result -2
+11월 19, 2020 24:15:49.178 [14656:7380:1119/001549.178:ERROR:socket_stream.cc(219)] Closing stream with result -2
+11월 19, 2020 24:15:49.754 [14656:7380:1119/001549.218:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+
+11월 23, 2020 18:47:08.776 NEW SESSION
+11월 23, 2020 18:47:08.776 [1123/184708.771:ERROR:directory_reader_win.cc(43)] FindFirstFile: 지정된 경로를 찾을 수 없습니다. (0x3)
+
+10월 20, 2021 18:00:07.356 NEW SESSION
+10월 20, 2021 18:00:07.357 [3496:9052:1020/180007.347:ERROR:chrome_browser_main_extra_parts_metrics.cc(228)] crbug.com/1216328: Checking Bluetooth availability started. Please report if there is no report that this ends.
+10월 20, 2021 18:00:07.359 [3496:9052:1020/180007.347:ERROR:chrome_browser_main_extra_parts_metrics.cc(231)] crbug.com/1216328: Checking Bluetooth availability ended.
+10월 20, 2021 18:00:07.361 [3496:9052:1020/180007.347:ERROR:chrome_browser_main_extra_parts_metrics.cc(234)] crbug.com/1216328: Checking default browser status started. Please report if there is no report that this ends.
+10월 20, 2021 18:00:07.374 [3496:9052:1020/180007.373:ERROR:chrome_browser_main_extra_parts_metrics.cc(238)] crbug.com/1216328: Checking default browser status ended.
+10월 20, 2021 18:00:07.379 [3496:6272:1020/180007.378:ERROR:device_event_log_impl.cc(214)] [18:00:07.377] USB: usb_device_handle_win.cc:1048 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+
+10월 21, 2021 16:03:07.769 NEW SESSION
+10월 21, 2021 16:03:07.769 [8660:9564:1021/160307.762:ERROR:chrome_browser_main_extra_parts_metrics.cc(228)] crbug.com/1216328: Checking Bluetooth availability started. Please report if there is no report that this ends.
+10월 21, 2021 16:03:07.771 [8660:9564:1021/160307.762:ERROR:chrome_browser_main_extra_parts_metrics.cc(231)] crbug.com/1216328: Checking Bluetooth availability ended.
+10월 21, 2021 16:03:07.773 [8660:9564:1021/160307.762:ERROR:chrome_browser_main_extra_parts_metrics.cc(234)] crbug.com/1216328: Checking default browser status started. Please report if there is no report that this ends.
+10월 21, 2021 16:03:07.774 [8660:4964:1021/160307.773:ERROR:device_event_log_impl.cc(214)] [16:03:07.773] USB: usb_device_handle_win.cc:1048 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+10월 21, 2021 16:03:07.779 [8660:9564:1021/160307.779:ERROR:chrome_browser_main_extra_parts_metrics.cc(238)] crbug.com/1216328: Checking default browser status ended.
+10월 21, 2021 19:04:04.841 [8660:1812:1021/190404.841:ERROR:connection_factory_impl.cc(429)] Failed to connect to MCS endpoint with error -105
+10월 22, 2021 10:18:07.697 [8660:1812:1022/101807.696:ERROR:connection_factory_impl.cc(429)] Failed to connect to MCS endpoint with error -106
+10월 22, 2021 10:18:07.701 [8660:10684:1022/101807.700:ERROR:get_updates_processor.cc(260)] PostClientToServerMessage() failed during GetUpdates with error 2
+10월 22, 2021 10:18:10.49 [8660:1812:1022/101810.048:ERROR:connection_factory_impl.cc(429)] Failed to connect to MCS endpoint with error -106
+
+10월 22, 2021 15:00:55.864 NEW SESSION
+10월 22, 2021 15:00:55.864 [10320:6720:1022/150055.831:ERROR:device_event_log_impl.cc(214)] [15:00:55.831] USB: usb_device_handle_win.cc:1048 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+10월 22, 2021 15:00:55.866 [10320:17144:1022/150055.855:ERROR:chrome_browser_main_extra_parts_metrics.cc(228)] crbug.com/1216328: Checking Bluetooth availability started. Please report if there is no report that this ends.
+10월 22, 2021 15:00:55.867 [10320:17144:1022/150055.855:ERROR:chrome_browser_main_extra_parts_metrics.cc(231)] crbug.com/1216328: Checking Bluetooth availability ended.
+10월 22, 2021 15:00:55.868 [10320:17144:1022/150055.855:ERROR:chrome_browser_main_extra_parts_metrics.cc(234)] crbug.com/1216328: Checking default browser status started. Please report if there is no report that this ends.
+10월 22, 2021 15:00:55.872 [10320:17144:1022/150055.871:ERROR:chrome_browser_main_extra_parts_metrics.cc(238)] crbug.com/1216328: Checking default browser status ended.
+10월 22, 2021 16:47:24.802 [8452:14836:1022/164724.801:ERROR:chrome_browser_main_extra_parts_metrics.cc(228)] crbug.com/1216328: Checking Bluetooth availability started. Please report if there is no report that this ends.
+10월 22, 2021 16:47:24.803 [8452:14836:1022/164724.802:ERROR:chrome_browser_main_extra_parts_metrics.cc(231)] crbug.com/1216328: Checking Bluetooth availability ended.
+10월 22, 2021 16:47:24.804 [8452:14836:1022/164724.802:ERROR:chrome_browser_main_extra_parts_metrics.cc(234)] crbug.com/1216328: Checking default browser status started. Please report if there is no report that this ends.
+10월 22, 2021 16:47:24.805 [8452:15228:1022/164724.804:ERROR:device_event_log_impl.cc(214)] [16:47:24.805] USB: usb_device_handle_win.cc:1048 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+10월 22, 2021 16:47:24.813 [8452:14836:1022/164724.813:ERROR:chrome_browser_main_extra_parts_metrics.cc(238)] crbug.com/1216328: Checking default browser status ended.

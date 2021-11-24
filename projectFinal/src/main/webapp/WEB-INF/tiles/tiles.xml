@@ -1,0 +1,174 @@
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<!--기본 레이아웃 -->
+	<definition name="tilesbase"
+		template="/WEB-INF/views/tile/layout.jsp">
+		<put-attribute name="title" value="" />
+		<!-- <put-attribute name="header1"
+			value="/WEB-INF/views/tile/header1.jsp" /> -->
+		<put-attribute name="subBody"
+			value="/WEB-INF/views/tile/subBody.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/tile/menu.jsp" />
+		<put-attribute name="body1" value="" />
+		<put-attribute name="body2"
+			value="/WEB-INF/views/tile/body2.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/tile/footer.jsp" />
+	</definition>
+
+	<!-- 변형 레이아웃 -->
+	<definition name="main" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/tile/main.jsp" />
+	</definition>
+	<definition name="joinForm" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/login/joinForm.jsp" />
+	</definition>
+	<definition name="PBview" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/tile/PBview.jsp" />
+	</definition>
+	<definition name="extra1" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/extra1.jsp" />
+	</definition>
+	<definition name="extra2" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/tile/extra1.jsp" />
+	</definition>
+	<definition name="mypage" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/mypage/mypage.jsp" />
+	</definition>
+	<definition name="loginForm" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/login/loginForm.jsp" />
+	</definition>
+	<definition name="myinfoUpdateForm" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/mypage/myinfoUpdateForm.jsp" />
+	</definition>
+	<definition name="myinfo" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/mypage/myinfo.jsp"></put-attribute>
+	</definition>
+	<definition name="insertPetInfo" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/mypage/insertPetInfo.jsp" />
+	</definition>
+
+	<definition name="helplist" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/helpBoard/helplist.jsp" />
+	</definition>
+	<definition name="helpInsertForm" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/helpBoard/helpInsertForm.jsp" />
+	</definition>
+	<definition name="helpView" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/helpBoard/helpView.jsp" />
+	</definition>
+	<definition name="list" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/pj_Board/list.jsp" />
+	</definition>
+	<definition name="view" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/pj_Board/view.jsp" />
+	</definition>
+	
+	<definition name="gonow" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/gonow/gonow.jsp" />
+	</definition>
+	
+	<definition name="petHealthInfo" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/gonow/petHealthInfo.jsp" />
+	</definition>
+	<!--민수 -->
+
+	<definition name="PBview" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/order/PBview.jsp" />
+	</definition>
+	
+	<definition name="PBview2" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/order/PBview2.jsp" />
+	</definition>
+
+	<definition name="orderFormRed" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/order/orderFormRed.jsp" />
+	</definition>
+
+	<definition name="orderCheck" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/order/orderCheck.jsp" />
+	</definition>
+
+	<!-- 건창 -->
+	<definition name = "boardList" extends="tilesbase">
+      <put-attribute name="title" value = ""/>
+      <put-attribute name="body1" value = "/WEB-INF/views/pj_Board/boardList.jsp"/>
+   </definition>
+	<definition name="boardView" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/pj_Board/boardView.jsp" />
+	</definition>
+	<definition name="boardInsertForm" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/pj_Board/boardInsertForm.jsp" />
+	</definition>
+	<definition name="boardUpdateForm" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/pj_Board/boardUpdateForm.jsp" />
+	</definition>
+	<!-- 추가 기능 -->
+	<definition name="gonow" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/gonow/gonow.jsp" />
+	</definition>
+	<definition name="myPetList" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/gonow/myPetList.jsp" />
+	</definition>
+	<definition name="petInfo" extends="tilesbase">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body1"
+			value="/WEB-INF/views/gonow/petInfo.jsp" />
+	</definition>
+	
+</tiles-definitions>

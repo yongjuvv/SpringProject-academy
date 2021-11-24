@@ -1,0 +1,48 @@
+package com.ch.project.service;
+
+import java.util.List;
+
+import com.ch.project.model.Review;
+
+public interface ReviewService {
+
+	Review selectMovReview(String email, int movNum);
+
+	Review selectTvReview(String email, int tvNum);
+
+	int movInsertNoSpoiler(Review review);
+
+	int movInsertSpoiler(Review review);
+
+	int insertTvReviewNoSpoiler(Review review);
+
+	int insertTvReviewSpoiler(Review review);
+
+	List<Review> hashTvList(int hashNum);
+	
+	List<Review> hashMoList(int hashNum);
+
+	List<Review> list(String email, int startRow, int endRow);
+
+	int total(String email);
+
+	List<Review> list2(String email, int startRow, int endRow);
+
+	int MovUpdateNoSpoiler(Review review);
+
+	int MovUpdateSpoiler(Review review);
+	
+	int movDelete(String email, int movNum);
+
+	int tvDelete(String email, int tvNum);
+
+	List<Review> movieReviewList(int movNum);
+
+	List<Review> tvReviewList(int tvNum);
+
+	int TvUpdateNoSpoiler(Review review);
+
+	int TvUpdateSpoiler(Review review);
+
+
+}

@@ -1,0 +1,43 @@
+package com.ch.project.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ch.project.dao.HashtagDao;
+import com.ch.project.model.Hashtag;
+
+@Service
+public class HashtagServiceImpl implements HashtagService {
+	@Autowired
+	private HashtagDao hd;
+
+	@Override
+	public List<Hashtag> list() {
+		return hd.list();
+	}
+
+	//해시태그 전체 목록 
+	@Override
+	public List<Hashtag> allList() {
+		return hd.allList();
+		
+	}
+	//해시태그 숫자로 이름 가져오기 
+	@Override
+	public String getHashName(int hashNum) {
+		return hd.getHashName(hashNum);
+	}
+	@Override
+	public Hashtag select(int hashNum) {
+		return hd.select(hashNum);
+
+	}
+
+	@Override
+	public int count() {
+		return hd.count();
+	}
+	
+}

@@ -1,0 +1,83 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../taglib.jsp" %>
+<%@ include file="../header.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>해시태그로 찾는 인생영화</title>
+</head>
+<body>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-success">
+							<input type="radio" name="jb-radio" id="jb-radio-1"> 1,000 포인트 | 1,000원
+						</label>
+						<label class="btn btn-success">
+							<input type="radio" name="jb-radio" id="jb-radio-2"> 5,500 포인트 (5,000p + 충전 보너스 10% up! 500p) | 5,000원
+						</label>
+						<label class="btn btn-success">
+							<input type="radio" name="jb-radio" id="jb-radio-3"> 12,000포인트 (10,000p + 충전 보너스 20% up! 2,000p) | 10,000원
+						</label>
+						<label class="btn btn-success">
+							<input type="radio" name="jb-radio" id="jb-radio-3"> 26,000 포인트 (20,000p + 충전 보너스 30% up! 6,000p) | 20,000원
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="container" align="center">
+			<h2>포인트 충전</h2>
+		<form action="pChargeDetail.do">
+			<input type="hidden" name="reviewNum" value="${reviewNum }">
+			<table class="table table-sensitive">
+	 			<tr>
+					<td align="center">
+					${pmember.memName}님의 현재 포인트는 ${pmember.memPoint }p 입니다
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="label-primary">
+						<input type="radio" name="pProductNum" value="1" required="required" />
+						1,000 포인트 | 1,000원
+						</label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>
+						<input type="radio" name="pProductNum" value="2" />
+						5,500 포인트 (5,000p + 충전 보너스 10% up! 500p) | 5,000원
+						</label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>
+						<input type="radio" name="pProductNum" value="3" />
+						12,000포인트 (10,000p + 충전 보너스 20% up! 2,000p) | 10,000원
+						</label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>
+						<input type="radio" name="pProductNum" value="4" />
+						26,000 포인트 (20,000p + 충전 보너스 30% up! 6,000p) | 20,000원
+						</label>
+					</td>
+				</tr>
+				<tr>
+					<td align="center">
+						<input type="submit" value="다음" class="btn btn-success" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

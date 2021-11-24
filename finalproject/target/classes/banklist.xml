@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="banklistns">
+	<resultMap type="banklist" id="banklistResult">
+		<result property="bank" column="bank" />
+		<result property="account" column="account" />
+		<result property="comName" column="comName" />
+	</resultMap>
+
+	<select id="list" resultMap="banklistResult">
+		select * from bankList1 order by bank
+	</select>
+</mapper>

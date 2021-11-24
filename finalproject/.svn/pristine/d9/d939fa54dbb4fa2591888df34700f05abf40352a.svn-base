@@ -1,0 +1,14 @@
+package com.ch.project.service;
+
+import java.util.List;
+
+import com.ch.project.model.Movie;
+
+public interface MovieService {
+
+	Movie select(int movNum);
+
+	List<Movie> movieList(Movie movie);
+
+
+}

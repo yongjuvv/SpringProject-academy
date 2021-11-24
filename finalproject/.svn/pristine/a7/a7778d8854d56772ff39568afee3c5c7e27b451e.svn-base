@@ -1,0 +1,24 @@
+-- 테이블 삭제
+drop table movPayList1;
+drop table movPay1;ss
+drop table movie1;
+drop table pCharge1;
+drop table pay1;
+drop table pProduct1;
+drop table review1;
+drop table pmember1;
+drop table hashtag1;
+drop table bankList1;
+drop table tv1;
+drop table act1;
+
+
+-- 테이블 데이터 지우기
+delete from review1
+delete from review1 where email='tree@hash.tag' and tvNum=1;
+delete from pmember1 where email='1@1.11';
+delete from movie1 where movNum = 57; 
+delete from movPay1 where email='tree@hash.tag';
+delete from person1 where personNum = 1007;
+delete from movie1;
+delete from tv1 where tvNum=4;

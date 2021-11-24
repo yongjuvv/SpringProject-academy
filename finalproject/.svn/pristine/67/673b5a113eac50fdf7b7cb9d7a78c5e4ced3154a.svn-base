@@ -1,0 +1,19 @@
+update pmember1 set memDel = 'n' where email = 'tree@hash.tag';
+update pmember1 set memName = '관리자2' where email = 'admin2@hash.tag';
+
+update review1 set myComm='2번영화수정' where movNum=2 and email = 'sky@hash.tag';
+update review1 set myComm='2번영화수정' where movNum=2 and email = 'admin@hash.tag';
+
+update review1 set commDel = 'n' where movNum=7 and email='sky@hash.tag'
+
+update review1 set spoiler = 'y' where movNum=2 and email='sky@hash.tag';
+update review1 set spoiler = 'y' where movNum=2 and email='white@hash.tag';
+
+update PMEMBER1 set memPoint = 0 where email='tree@hash.tag';
+update MOVPAY1 set movState = null where email='tree@hash.tag';
+
+select * from movpay where email='tree@hash.tag';
+select * from pmember;
+
+-- 칼럼 데이터 타입 수정
+alter table movie Modify (act1Ko varchar2(40));

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hashtagns">
+	<resultMap type="hashtag" id="hashtagResult">
+		<result property="hashNum" column="hashNum" />
+		<result property="hashName" column="hashName" />
+		<result property="hashName" column="hashName" />
+	</resultMap>
+
+	<select id="select" parameterType="int" resultType="hashtag">
+		select * from
+		hashtag1 where hashNum=#{hashNum}
+	</select>
+
+	<!-- 메인 페이지에 뜨는 랜덤 해시태그 -->
+	<select id="list" resultMap="hashtagResult">
+		select s.* from (select * from
+		hashtag1 order by DBMS_random.value) s where
+		rownum between 1 and 35
+	</select>
+
+	<!-- 해시태그 전체 목록 -->
+	<select id="allList" resultMap="hashtagResult">
+		SELECT * FROM HASHTAG1
+	</select>
+
+	<!-- 리뷰 작성 폼에 뜨는 해시태그 -->
+	<select id="getHashName" parameterType="int" resultType="string">
+		SELECT
+		HASHNAME FROM HASHTAG1 WHERE HASHNUM = #{hashNum}
+	</select>
+
+	<!-- footer 전체 해시태그 갯수 -->
+	<select id="count" resultType="int">
+		select count(*) from
+		(select
+		hashNum from review1, hashtag1 where hashNum1 = hashNum or hashNum2 =
+		hashNum
+		or hashNum3 =hashNum)
+	</select>
+
+	<!-- 영화 상세 페이지에 가장 많이 선택된 해시태그 순 -->
+	<select id="movHashtagList" parameterType="int"
+		resultMap="hashtagResult">
+		select hashNum, count(*) "c" from
+		(select hashNum, hashName from hashtag1 h, review1 r
+		where (h.hashNum=r.hashNum1 or h.hashNum=r.hashNum2 or
+		h.hashNum=r.hashNum3)
+		and movNum=#{movNum})
+		group by hashNum order by "c" desc
+	</select>
+
+	<!-- tv 상세 페이지에 가장 많이 선택된 해시태그 순 -->
+	<select id="tvHashtagList" parameterType="int"
+		resultMap="hashtagResult">
+		select hashNum, count(*) "c" from
+		(select hashNum, hashName from hashtag1 h, review1 r
+		where (h.hashNum=r.hashNum1 or h.hashNum=r.hashNum2 or
+		h.hashNum=r.hashNum3)
+		and tvNum=#{tvNum})
+		group by hashNum order by "c" desc
+	</select>
+
+	<!-- hot 해시리스트 -->
+	<update id="updateClickCount" parameterType="int">
+		update hashtag1 set
+		clickCount=clickCount+1 where hashNum=#{hashNum}
+	</update>
+
+	<select id="recomHashList" resultMap="hashtagResult">
+		<![CDATA[
+			select rowNum, a.* from (select * from hashtag1 order by clickCount desc) a where rowNum < 6
+		]]>
+	</select>
+	
+	<select id="sum" resultType="int" parameterType="string">
+	select a+b+c sum from
+		(select count(hashNum1) a from review1
+		where email=#{email}),
+		(select count(hashNum2)b from review1
+		where email=#{email} and hashNum2 != 0),
+		(select count(hashNum3)c from review1
+		where email=#{email} and hashNum3 != 0) 
+	</select>
+
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pchargens">
+	<resultMap type="pcharge" id="pchargeResult">
+		<result property="pChargeNum" column="pChargeNum" />
+		<result property="pProductNum" column="pProductNum" />
+		<result property="email" column="email" />
+		<result property="pChargeDate" column="pChargeDate" />
+		<result property="pDesc" column="pDesc" />
+		<result property="pProductPoint" column="pProductPoint" />
+		<result property="tvEpNum" column="tvEpNum" />
+		<result property="tvEpPrice" column="tvEpPrice" />
+		<result property="movPrice" column="movPrice" />
+	</resultMap>
+	
+	<insert id="pChargeInsert" parameterType="hashMap">
+		<selectKey keyProperty="pChargeNum" order="BEFORE" resultType="int">
+			select nvl(max(pChargeNum),0)+1 from pcharge1
+		</selectKey>
+		insert into pcharge1 (pChargeNum, pProductNum, email, pChargeDate)
+		values (#{pChargeNum}, #{pProductNum}, #{email}, sysdate)
+	</insert>
+	
+	<select id="selectPChargeList" parameterType="string" resultMap="pchargeResult">
+		select * from
+		(select f.*, rowNum rn from(
+		select *from ((select pchargedate, email,pdesc,0 tvEpNum, pproductpoint,0 tvepprice,0 movprice, c.pproductNum
+		from pcharge1 c,pproduct1 d where email=#{email} and
+		c.pproductNum=d.pproductNum)
+		union
+		((select paydate,email,movName,0,0,0,movprice, a.movNum
+		from pay1 a,movie1 b where a.email = #{email} and a.movNum=b.movNum)
+		union
+		(select paydate,email,g.tvName,h.tvEpNum,0,h.tvEpPrice,0,e.tvNum
+		from pay1 e, TVEP1 h, tv1 g where e.tvNum=h.tvNum and e.tvNum = h.tvNum and h.tvNum=g.tvNum
+		and e.tvEPnum = h.tvEpNum and e.email=#{email}))) order by pchargedate desc)f) 
+		where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="total" parameterType="string" resultType="int">
+		select count(*) from (select pchargeNum, 0 payNum from pcharge1 where email=#{email} union
+		select 0 pchargeNum,payNum from Pay1 where email=#{email})
+	</select>
+</mapper>

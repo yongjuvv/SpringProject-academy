@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pchargens">
+	<resultMap type="pcharge" id="pchargeResult">
+		
+		<result property="pChargeNum" column="pChargeNum" />
+		<result property="pProductNum" column="pProductNum" />
+		<result property="email" column="email" />
+		<result property="pChargeDate" column="pChargeDate" />
+		<result property="pDesc" column="pDesc" />
+		<result property="pProductPoint" column="pProductPoint" />
+	</resultMap>
+<insert id="pChargeInsert" parameterType="string">
+<selectKey keyProperty="pChargeNum" order="BEFORE" resultType="int">
+		select nvl(max(pChargeNum),0)+1 from pcharge1
+		</selectKey>
+	insert into pcharge1 (pChargeNum, pProductNum, email, pChargeDate)
+	values (#{pChargeNum}, #{pProductNum} , #{email},sysdate)
+</insert>
+<select id="selectPChargeList" parameterType="string" resultMap="pchargeResult">
+select * from (
+	select f.*, rowNum rn from
+					((select pchargedate, email,pdesc, pproductpoint, c.pproductNum 
+						from pcharge1 c,pproduct1 d where email=#{email} and c.pproductNum=d.pproductNum)
+					  union 
+						(select paydate,email,movName,movprice * (-1), a.movNum 
+							from pay1 a,movie1 b where a.email = #{email} and a.movNum=b.movNum)
+						order by pchargedate desc ) f )
+where rn between #{startRow} and #{endRow}
+</select>
+<select id="total" parameterType="string" resultType="int">
+select count(*) from (select pchargeNum from pcharge1 where email=#{email} union
+		select payNum from pay1 where email=#{email})
+</select>
+</mapper>

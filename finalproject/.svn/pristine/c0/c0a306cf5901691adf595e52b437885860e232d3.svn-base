@@ -1,0 +1,104 @@
+package com.ch.project.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ch.project.model.Hashtag;
+import com.ch.project.model.Movie;
+import com.ch.project.model.Review;
+import com.ch.project.model.Tv;
+import com.ch.project.service.HashtagService;
+import com.ch.project.service.MovieService;
+import com.ch.project.service.PersonService;
+import com.ch.project.service.ReviewService;
+import com.ch.project.service.TvService;
+import org.springframework.ui.Model;
+
+@Controller
+public class MovieController {
+	@Autowired
+	private MovieService ms;
+	@Autowired
+	private TvService ts;
+	@Autowired
+	private HashtagService hs;
+	@Autowired
+	private ReviewService rs;
+	@Autowired
+	private PersonService ps;
+	
+	@RequestMapping("main2")
+	public String main2() {
+		return "main2";
+	}
+
+	@RequestMapping("searchForm")
+	public String searchForm(Hashtag hashtag, Model model) {
+		List<Hashtag> list = hs.list();
+		int count = hs.count();
+		model.addAttribute("count",count);
+		model.addAttribute("list", list);
+		return "searchForm";
+	}
+	
+	// 통합 검색 결과
+	@RequestMapping("searchResult")
+	public String searchResult(Movie movie, Tv tv, Model model, HttpServletRequest request) {
+		List<Movie> movieList = ms.movieList(movie);
+		List<Tv> tvList = ts.tvList(tv);
+		model.addAttribute("movieList", movieList);
+		model.addAttribute("tvList", tvList);
+		return "tvNmovie/searchResult";
+	}
+	
+	// 영화 상세 페이지
+	@RequestMapping("movSearchResult")
+	public String movSearchResult(HttpSession session, int movNum, Model model) {
+		
+		Movie movie = ms.select(movNum);
+		//감독이름 배우이름 가져오기
+		movie.setMovDirName(ps.getMovDirName(movie.getMovDirNum()));
+		if(movie.getActNum1()!=0) movie.setActName1(ps.getActName(movie.getActNum1()));
+		if(movie.getActNum2()!=0) movie.setActName2(ps.getActName(movie.getActNum2()));
+		if(movie.getActNum3()!=0) movie.setActName3(ps.getActName(movie.getActNum3()));
+		if(movie.getActNum4()!=0) movie.setActName4(ps.getActName(movie.getActNum4()));
+		if(movie.getActNum5()!=0) movie.setActName5(ps.getActName(movie.getActNum5()));
+		if(movie.getActNum6()!=0) movie.setActName6(ps.getActName(movie.getActNum6()));
+		if(movie.getActNum7()!=0) movie.setActName7(ps.getActName(movie.getActNum7()));
+		
+		/* 빈 칸을 검색하거나 DB에 없는 결과일 때 */
+		int result = 0;
+		if (movie != null) {
+			result = 1;
+		}
+		
+		String email = (String) session.getAttribute("email");
+		/*String movState = null;*/
+		
+		if (email != null) {
+			Review review = rs.selectMovReview(email, movNum);
+			model.addAttribute("review", review);
+		}
+		
+		List<Review> movieReviewList = rs.movieReviewList(movNum);
+		
+		for (Review re : movieReviewList) {
+			re.setHashName1(hs.getHashName(re.getHashNum1()));
+			re.setHashName2(hs.getHashName(re.getHashNum2()));
+			re.setHashName3(hs.getHashName(re.getHashNum3()));
+		}
+		
+		model.addAttribute("movie", movie);
+		model.addAttribute("result", result);
+		model.addAttribute("movieReviewList", movieReviewList);
+		
+		return "tvNmovie/movSearchResult";
+	}
+
+}

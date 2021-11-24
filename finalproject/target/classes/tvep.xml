@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tvepns">
+	<resultMap type="tvep" id="tvepResult">
+		<result property="tvNum" column="tvNum" />
+		<result property="tvEpNum" column="tvEpNum" />
+		<result property="tvEpVid" column="tvEpVid" />
+		<result property="tvEpPrice" column="tvEpPrice" />
+	</resultMap>
+	
+	<!-- tv상세페이지 epList -->
+	<select id="tvEpList" parameterType="int" resultMap="tvepResult">
+		select *
+		from tvep1 where tvNum=#{tvNum}
+	</select>
+	
+	<select id="select" parameterType="string" resultMap="tvepResult">
+		select * from tvep1 where tvNum=#{tvNum} and tvEpNum=#{tvEpNum}
+	</select>
+</mapper>

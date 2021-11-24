@@ -1,0 +1,111 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../sessionChk.jsp"%>
+<%@ include file="../header.jsp"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>포인트 충전</title>
+<style type="text/css">
+@import url("form.css");
+caption {
+	padding-top: 20px;
+	padding-bottom: 15px;
+	font-size: 20px;
+	color: #000000;
+	font-weight: bolder;
+	text-align: left;
+	border-bottom: 1px solid #bbbbbb;
+}
+
+th {
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	border-bottom: 1px solid #d8d8d8;
+	text-align: right;
+}
+
+td {
+	padding: 10px;
+	border-bottom: 1px solid #d8d8d8;
+	font-weight: normal;
+	text-align: right;
+}
+</style>
+</head>
+<body>
+	<section class="detail">
+	<table>
+		<caption>상세 내역</caption>
+		<tr>
+			<th width="30%">충전 금액</th>
+			<td>${pproduct.pProductPrice }원</td>
+		</tr>
+		<tr>
+			<th width="30%">나의 현재 포인트</th>
+			<td>${pmember.memPoint}p</td>
+		</tr>
+		<tr>
+			<th width="30%">충전될 포인트</th>
+			<td>${pproduct.pDesc }</td>
+		</tr>
+		<tr>
+			<th width="30%">충전 후 포인트 잔액</th>
+			<td>${balance }p</td>
+		</tr>
+	</table>
+	</section>
+	
+	<section class="memDetail">
+	<form method="post" action="pointPayChk.do" name="buyinput">
+			<input type="hidden" name="email" value="${pmember.email}">
+			<input type="hidden" name="pProductNum" value="${pproduct.pProductNum}">
+			<input type="hidden" name="pChargeNum" value="${pcharge.pChargeNum}">
+			<input type="hidden" name="memPoint" value="${pmember.memPoint}">
+			<input type="hidden" name="reviewNum" value="${reviewNum }">
+			<input type="hidden" name="balance" value="${balance }">
+		<table>
+			<caption>결제 정보</caption>
+				<tr>
+					<th width="30%">이메일</th>
+					<td>
+						${pmember.email }
+					</td>
+				</tr>
+				<tr>
+					<th width="30%">이름</th>
+					<td>${pmember.memName }</td>
+				</tr>
+				<tr>
+					<th>포인트 결제 계좌</th>
+					<td>
+						<select name="account">
+							<c:forEach var="banklist" items="${bankList}">
+								<option value="${banklist.bank}">${banklist.bank}-${banklist.account}-${banklist.comName}</option>
+							</c:forEach>
+						</select>
+					</td>
+				<tr>
+					<td colspan="2" style="text-align: center;">
+						<input type="button" value="충전 취소" onclick="history.go(-1)">
+						<input type="submit" value="충전하기">
+					</td>
+				</tr>
+		</table>
+	</form>
+	</section>
+	
+	<footer class="footer">
+		<div id="footer_menu">
+			<ul>
+				<li id="bold12">사업자등록번호 (123-45-67890)</li>
+				<li id="bold12">(주)해시</li>
+				<li id="bold12">고객센터 cs@hash.tag</li>
+			</ul>
+		</div>
+	</footer>
+</body>
+</html>

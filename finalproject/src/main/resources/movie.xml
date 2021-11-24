@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="moviens">
+	<resultMap type="movie" id="movieResult">
+		<result property="movNum" column="movNum" />
+		<result property="movName" column="movName" />
+		<result property="movDirNum" column="movDirNum" />
+		<result property="movTime" column="movTime" />
+		<result property="movDate" column="movDate" />
+		<result property="prod" column="prod" />
+		<result property="movGrade" column="movGrade" />
+		<result property="movPic" column="movPic" />
+		<result property="movDesc" column="movDesc" />
+		<result property="movGenre1" column="movGenre1" />
+		<result property="movGenre2" column="movGenre2" />
+		<result property="movPrice" column="movPrice" />
+		<result property="movVid" column="movVid" />
+		<result property="movTrailer" column="movTrailer" />
+		<result property="actNum1" column="actNum1" />
+		<result property="actNum2" column="actNum2" />
+		<result property="actNum3" column="actNum3" />
+		<result property="actNum4" column="actNum4" />
+		<result property="actNum5" column="actNum5" />
+		<result property="actNum6" column="actNum6" />
+		<result property="actNum7" column="actNum7" />
+		<result property="movDirName" column="movDirName" />
+		<result property="tvName" column="tvName" />
+		<result property="movClick" column="movClick" />
+		<result column="personName" property="personName"/>
+		<result column="personNum" property="personNum"/>
+		<result column="totTime" property="totTime"/>
+	</resultMap>
+
+	<!-- 영화상세페이지 -->
+	<select id="select" parameterType="int" resultType="movie">
+		select * from movie1 where movNum = #{movNum}
+	</select>
+
+	<!-- searchResult 영화부분 -->
+	<select id="movieList" parameterType="movie" resultMap="movieResult">
+		select movie1.* from
+			(select movNum from (select movNum from
+				(select personNum from person1
+				where personName like '%'||#{search}||'%'
+				or replace(personName, ' ','') like '%'||#{search}||'%'), movie1
+			where movDirNum=personNum
+			or actNum1 = personNum or actNum2 = personNum
+			or actNum3 = personNum or actNum4 = personNum
+			or actNum5 = personNum or actNum6 = personNum or actNum7 = personNum
+			union all
+			select movNum from movie1
+			where movName like '%'||#{search}||'%'
+			or replace(movName, ' ','') like '%'||#{search}||'%') group by movNum) a, movie1
+			where movie1.movNum=a.movNum
+	</select>
+
+	<select id="listAll" resultMap="movieResult">
+		select movName from movie1 union
+		select tvName from tv1
+		union
+		select personName from person1
+	</select>
+	
+	<!-- hot 영화/영상 리스트-->
+	<select id="recomMovList" parameterType="movie" resultMap="movieResult">
+		 <![CDATA[select * from( select * from movie1 order by movClick+
+		 (select count(*) from review1 where movNum = #{movNum}) desc) where rowNum<=5]]>
+	</select>
+	
+	<select id="searchMovieList" parameterType="string" resultMap="movieResult"> 
+		select movie1.* from (select movNum from (select movNum from
+		(select personNum from person1 where personName like
+		'%'||#{collectList}||'%' or replace(personName, ' ','') like
+		'%'||#{collectList}||'%'), movie1 where movDirNum=personNum or actNum1
+		= personNum or actNum2 = personNum or actNum3 = personNum or actNum4 =
+		personNum or actNum5 = personNum or actNum6 = personNum or actNum7 =
+		personNum union all select movNum from movie1 where movName like
+		'%'||#{collectList}||'%' or replace(movName, ' ','') like
+		'%'||#{collectList}||'%') group by movNum)a, movie1 where
+		movie1.movNum=a.movNum 
+	</select>
+	
+	<select id="preAct" parameterType="string" resultMap="movieResult"> 
+		select g.personName from (select personName personName,
+		count(*) from (select personName from MOVIE1 m, PERSON1 p, review1 r
+		where m.actNum1=p.personNum and m.movNum=r.movNum and email=#{email}
+		union all select personName from MOVIE1 m, PERSON1 p, review1 r where
+		m.actNum2=p.personNum and m.movNum=r.movNum and email=#{email}) group
+		by personName order by count(*) desc)g 
+	</select>
+
+	<select id="preDic" parameterType="string" resultMap="movieResult"> 
+		select g.personName from
+			(select personName personName, count(*) from
+				(select personName from MOVIE1 m, PERSON1 p, review1 r
+				where m.movDirNum=p.personNum and m.movNum=r.movNum and email=#{email})
+			group by personName order by count(*) desc) g
+	</select>
+
+	<select id="timeSum" parameterType="movie" resultMap="movieResult"> 
+		select movTime from
+			(select movTime from review1 r, movie1 m where email=#{email} and r.movNum=m.movNum) 
+	</select>
+</mapper>

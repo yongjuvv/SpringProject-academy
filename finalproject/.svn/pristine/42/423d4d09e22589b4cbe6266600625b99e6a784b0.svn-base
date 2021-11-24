@@ -1,0 +1,140 @@
+package com.ch.project.controller;
+
+import java.sql.Date;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.ch.project.model.PMember;
+import com.ch.project.service.PMemberService;
+
+@Controller
+public class PMemberController {
+
+	@Autowired
+	private PMemberService ps;
+
+	@RequestMapping("joinForm")
+	public String joinForm() {
+		return "member/joinForm";
+	}
+
+	@RequestMapping(value = "emailChk", method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody int emailChk(String email, Model model) {
+		int result = 0;
+		result = ps.emailChk(email);
+		return result;
+	}
+
+	@RequestMapping("join")
+	public String join(PMember pmember, Model model) {
+		int result = ps.insert(pmember);
+		model.addAttribute("result", result);
+		return "member/join";
+	}
+
+	@RequestMapping("loginForm")
+	public String loginForm() {
+		return "member/loginForm";
+	}
+
+	@RequestMapping("login")
+	public String login(PMember pmember, Model model, HttpSession session) {
+		int result = 0;
+		PMember mem = ps.select(pmember.getEmail());
+		if (mem == null || mem.getMemDel().equals("y"))
+			result = -1;
+		else {
+			if (mem.getPass().equals(pmember.getPass())) {
+
+				session.setAttribute("email", pmember.getEmail());
+				result = 1;
+			} else {
+				result = 0;
+			}
+		}
+		model.addAttribute("result", result);
+		return "member/login";
+	}
+
+	@RequestMapping("memUpdateForm")
+	public String UpdateForm() {
+		return "member/memUpdateForm";
+	}
+
+	@RequestMapping("myPage")
+	public String myPage(Model model, HttpSession session) {
+		String email = (String) session.getAttribute("email");
+		if (email != null) {
+			PMember pmember = ps.select(email);
+			model.addAttribute("pmember", pmember);
+		}
+		return "member/myPage";
+	}
+
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "member/logout";
+	}
+	
+	@RequestMapping("memDelForm")
+	public String memDelForm() {
+		return "member/delForm";
+	}
+	
+	@RequestMapping(value = "passChk", method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody int passChk(String pass, HttpSession session, Model model) {
+		String email = (String) session.getAttribute("email");
+		PMember pmember = ps.select(email);
+		String sessionPass = pmember.getPass();		
+		if(pass.equals(sessionPass))
+		return 1;
+		else return 0;
+	}
+	
+	@RequestMapping("memDelForm2")
+	public String memDelForm2() {
+		return "member/delForm2";
+	}
+	
+	@RequestMapping("memDel")
+	public String memdel(HttpSession session, Model model) {
+		String email = (String) session.getAttribute("email");
+		int result = ps.delete(email);
+		model.addAttribute("result",result);
+		return "member/delete";
+	}
+	
+	@RequestMapping("view")
+	public String view(HttpSession session, Model model) {
+		String email = (String) session.getAttribute("email");
+		PMember pmember = ps.select(email);
+		model.addAttribute("pmember",pmember);
+		return "member/view";
+	}
+	
+	@RequestMapping(value = "memUpdate", method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody int memUpdate(String nickName,Date memBirth, HttpSession session, Model model) {
+		String email = (String) session.getAttribute("email");
+		PMember pmember = new PMember();
+		pmember.setEmail(email);
+		pmember.setNickName(nickName);
+		pmember.setMemBirth(memBirth);
+		int result = ps.update(pmember);	
+		return result;
+	}
+	
+	@RequestMapping("pChargeForm")
+	public String pChargeForm(HttpSession session, Model model ) {
+		String email = (String) session.getAttribute("email");
+		PMember pmember = ps.select(email);
+		model.addAttribute("pmember",pmember);
+		return "pointNpay/pChargeForm";
+	}
+}

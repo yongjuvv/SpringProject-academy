@@ -1,0 +1,40 @@
+package com.ch.project.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ch.project.model.Hashtag;
+import com.ch.project.model.Movie;
+import com.ch.project.model.Review;
+import com.ch.project.model.Tv;
+import com.ch.project.service.HashtagService;
+import com.ch.project.service.ReviewService;
+
+@Controller
+public class HashtagController {
+	@Autowired
+	private HashtagService hs;
+	@Autowired
+	private ReviewService rs;
+	@Autowired
+	private ReviewService ms;
+	@Autowired
+	private ReviewService ts;
+	
+
+	@RequestMapping("hashtagResult")
+	public String hashtagResult(int hashNum,Hashtag hashtag, Model model) {
+		Hashtag hashtag1 = hs.select(hashNum);
+		List<Review> hashMoList = rs.hashMoList(hashNum);
+		List<Review> hashTvList = rs.hashTvList(hashNum);
+		model.addAttribute("hashtag1", hashtag1);
+		model.addAttribute("hashMoList", hashMoList);
+		model.addAttribute("hashTvList", hashTvList);
+		return "hashtag/hashtagResult";
+
+	}
+}

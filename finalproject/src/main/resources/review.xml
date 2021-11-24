@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reviewns">
+	<resultMap type="review" id="reviewResult">
+		<result property="reviewNum" column="reviewNum" />
+		<result property="email" column="email" />
+		<result property="movNum" column="movNum" />
+		<result property="tvNum" column="tvNum" />
+		<result property="hashNum1" column="hashNum1" />
+		<result property="hashNum2" column="hashNum2" />
+		<result property="hashNum3" column="hashNum3" />
+		<result property="reviewComm" column="reviewComm" />
+		<result property="reviewDate" column="reviewDate" />
+		<result property="reviewUpdate" column="reviewUpdate" />
+		<result property="reviewFirstChk" column="reviewFirstChk" />
+		<result property="reviewSpoiler" column="reviewSpoiler" />
+		<result property="reviewRate" column="reviewRate" />
+		<result property="reviewLike" column="reviewLike" />
+		<result property="hashName1" column="hashName1" />
+		<result property="hashName2" column="hashName2" />
+		<result property="hashName3" column="hashName3" />
+		<result property="movName" column="movName" />
+		<result property="tvName" column="tvName" />
+		<result property="nickName" column="nickName" />
+		<result property="movPic" column="movPic" />
+		<result property="tvPic" column="tvPic" />
+		<result property="movDate" column="movDate" />
+		<result property="tvDate" column="tvDate" />
+		<result property="likeChk" column="likeChk" />
+		<result column="movTime" property="movTime"/>
+		<result column="personName" property="personName"/>
+		<result column="movGenre1" property="movGenre1"/>
+		<result column="movGenre2" property="movGenre2"/>
+	</resultMap>
+
+	<!-- 리뷰 검색 -->
+	<select id="select" parameterType="int" resultType="review">
+		select * from
+		review1 r, pmember1 p where r.email=p.email and
+		reviewNum=#{reviewNum}
+	</select>
+
+	<!-- 리뷰 검색(이메일로) -->
+	<select id="select2" parameterType="string" resultType="review">
+		select *
+		from review1 where email=#{email}
+	</select>
+
+	<!-- 영화 리뷰가 있는지 검색 -->
+	<select id="selectMovReview" parameterType="review"
+		resultType="review">
+		select * from review1 where movNum=#{movNum} and
+		email=#{email}
+	</select>
+
+	<!-- tv 리뷰가 있는지 검색 -->
+	<select id="selectTvReview" parameterType="review"
+		resultType="review">
+		select * from review1 where tvNum=#{tvNum} and email=#{email}
+	</select>
+
+	<!-- 첫 코멘트 등록 (스포 X) -->
+	<update id="writeCommentFirst" parameterType="review">
+		UPDATE REVIEW1 SET
+		hashNum1=#{hashNum1},
+		hashNum2=#{hashNum2},
+		hashNum3=#{hashNum3},
+		reviewComm=#{reviewComm},
+		reviewUpdate=sysdate,
+		reviewFirstChk=1
+		WHERE reviewNum=#{reviewNum}
+	</update>
+
+	<!-- 첫 코멘트 등록 (스포 O) -->
+	<update id="writeCommentSpoilerFirst" parameterType="review">
+		UPDATE REVIEW1 SET
+		hashNum1=#{hashNum1},
+		hashNum2=#{hashNum2},
+		hashNum3=#{hashNum3},
+		reviewComm=#{reviewComm},
+		reviewUpdate=sysdate,
+		reviewFirstChk=1,
+		reviewSpoiler='y'
+		WHERE reviewNum=#{reviewNum}
+	</update>
+
+	<!-- 리뷰 코멘트 등록 (스포 X) -->
+	<update id="writeComment" parameterType="review">
+		UPDATE REVIEW1 SET
+		hashNum1=#{hashNum1},
+		hashNum2=#{hashNum2},
+		hashNum3=#{hashNum3},
+		reviewComm=#{reviewComm},
+		reviewUpdate=sysdate,
+		reviewFirstChk=2
+		WHERE reviewNum=#{reviewNum}
+	</update>
+
+	<!-- 리뷰 코멘트 등록 (스포 O) -->
+	<update id="writeCommentSpoiler" parameterType="review">
+		UPDATE REVIEW1 SET
+		hashNum1=#{hashNum1},
+		hashNum2=#{hashNum2},
+		hashNum3=#{hashNum3},
+		reviewComm=#{reviewComm},
+		reviewUpdate=sysdate,
+		reviewFirstChk=2,
+		reviewSpoiler='y'
+		WHERE reviewNum=#{reviewNum}
+	</update>
+	
+	<!-- 리뷰 코멘트 삭제 -->
+	<update id="deleteComment" parameterType="int">
+		UPDATE REVIEW1 SET
+		hashNum1=0,
+		hashNum2=0,
+		hashNum3=0,
+		reviewComm=null,
+		reviewFirstChk=3
+		WHERE REVIEWNUM=#{reviewNum}
+	</update>
+
+	<!-- 해시태그에 따른 영화 리스트 -->
+	<select id="hashMoList" parameterType="int"
+		resultMap="reviewResult">
+		select a.movNum, movName, movPic, movDate from
+		(select
+		movNum, count(*) c from
+		(select hashNum, r.movNum, hashName from
+		hashtag1 h, review1 r
+		where (h.hashNum=r.hashNum1 or
+		h.hashNum=r.hashNum2 or
+		h.hashNum=r.hashNum3)
+		and hashNum=#{hashNum})
+		group by movNum order by c desc) a,
+		movie1 m where a.movNum = m.movNum
+	</select>
+
+	<!-- 해시태그에 따른 영상 리스트 -->
+	<select id="hashTvList" parameterType="int"
+		resultMap="reviewResult">
+		select a.tvNum, tvName, tvPic, tvDate from
+		(select tvNum,
+		count(*) c from
+		(select hashNum, r.tvNum, hashName from hashtag1 h,
+		review1 r
+		where (h.hashNum=r.hashNum1 or h.hashNum=r.hashNum2 or
+		h.hashNum=r.hashNum3)
+		and hashNum=#{hashNum}) group by tvNum order by c
+		desc) a,
+		tv1 t where a.tvNum = t.tvNum
+	</select>
+
+	<!-- 페이징 작업을 위한 리뷰 총 갯수 -->
+	<select id="total" parameterType="string" resultType="int">
+		select
+		count(*) from review1 where email=#{email}
+	</select>
+
+	<!-- 리뷰 전체 목록 -->
+	<select id="list2" parameterType="string" resultType="review">
+		select *
+		from (select a.*, rowNum rn from (
+		select * from (select r.movNum,
+		movName, null tvName, tvNum, email,
+		reviewDate, reviewComm, hashNum1,
+		hashNum2, hashNum3, reviewNum from review1 r,
+		movie1 m where email=#{email} and
+		r.movNum=m.movNum
+		union
+		select movNum, null, tvName,
+		review1.tvNum, email, reviewDate, reviewComm,
+		hashNum1, hashNum2,
+		hashNum3, reviewNum from review1, tv1 where email=#{email}
+		and
+		review1.tvNum=tv1.tvNum) order by reviewDate) a)
+		where (rn between
+		#{startRow} and #{endRow})
+	</select>
+
+	<!-- 영화 상세 페이지 리뷰 목록 -->
+	<select id="movieReviewList" parameterType="int" resultMap="reviewResult">
+		select r.*, nickName from review1 r, pmember1 p
+		where r.email=p.email and movNum=#{movNum} order by reviewDate desc
+	</select>
+
+	<!-- 영화 상세 페이지 리뷰 목록 (세션 있) -->
+	<select id="movieReviewList2" parameterType="hashMap" resultMap="reviewResult">
+		select likeChk, nickName, r.*
+		from review1 r, (select * from like1 where email=#{email})l, pmember1 p
+		where r.reviewNum=l.reviewNum(+) and movNum=#{movNum} and p.email=r.email order by r.reviewNum desc
+	</select>
+
+	<!-- tv 상세 페이지 리뷰 목록 -->
+	<select id="tvReviewList" parameterType="int" resultMap="reviewResult">
+		select review1.*, nickName from review1, pmember1
+			where review1.email=pmember1.email and tvNum=#{tvNum}
+	</select>
+	
+	<!-- tv 상세 페이지 리뷰 목록 (세션 있) -->
+	<select id="tvReviewList2" parameterType="hashMap" resultMap="reviewResult">
+		select likeChk, nickName, r.*
+		from review1 r, (select * from like1 where email=#{email})l, pmember1 p
+		where r.reviewNum=l.reviewNum(+) and tvNum=#{tvNum} and p.email=r.email order by r.reviewNum desc
+	</select>
+	
+	<!-- 코멘트 좋아요 등록 -->
+	<update id="likeUp" parameterType="int">
+		update review1 set reviewLike=reviewLike+1 where reviewNum=#{reviewNum}
+	</update>
+	
+	<!-- 코멘트 좋아요 등록 취소 -->
+	<update id="likeDown" parameterType="int">
+		update review1 set reviewLike=reviewLike-1 where reviewNum=#{reviewNum}
+	</update>
+	
+	<!-- tv 평점 등록 -->
+	<insert id="tvReviewRateInsert" parameterType="string">
+		<selectKey keyProperty="reviewNum" order="BEFORE" resultType="int">
+			select nvl(max(reviewNum), 0) + 1 reviewNum from review1
+		</selectKey>
+		insert into review1 values (#{reviewNum}, #{email}, 0, #{tvNum},
+		0, 0, 0, null, sysdate, sysdate, 0, 'n', #{reviewRate}, 0)
+	</insert>
+	
+	<update id="reviewRateUpdate" parameterType="hashMap">
+	UPDATE REVIEW1 SET reviewRate=#{reviewRate} WHERE reviewNum=#{reviewNum}
+	</update>
+	
+	<!-- 영화 평점 등록 -->
+	<insert id="movReviewRateInsert" parameterType="string">
+		<selectKey keyProperty="reviewNum" order="BEFORE" resultType="int">
+			select nvl(max(reviewNum), 0) + 1 reviewNum from review1
+		</selectKey>
+		insert into review1 values (#{reviewNum}, #{email}, #{movNum}, 0,
+		0, 0, 0, null, sysdate, sysdate, 0, 'n', #{reviewRate}, 0)
+	</insert>
+	
+	<!-- 해당 리뷰에 대한 세션 이메일 값의 데이터 존재 여부 조회 -->
+	<select id="countLikeChk" parameterType="hashMap">
+	select count(*)
+		from review1 r, LIKE1 l
+		where r.reviewNum=l.reviewNum and r.reviewNum=#{reviewNum} and l.email=#{email};
+	</select>
+	
+	<!-- 해당 리뷰에 대한 세션 이메일 값의 likeChk 여부 조회 -->
+	<select id="selectLikeChk" parameterType="hashMap">
+	select r.reviewNum, l.email, likeChk
+		from review1 r, LIKE1 l
+		where r.reviewNum=l.reviewNum and r.reviewNum=#{reviewNum} and l.email=#{email};
+	</select>
+	
+	<!-- 마이페이지 영화 태그 갯수 -->
+	<select id="countMovie" parameterType="string" resultType="int">
+		select count(*) from
+			(select hashNum1 from review1 where email=#{email} and movNum!=0 and hashNum1!=0 union all
+			select hashNum2 from review1 where email=#{email} and movNum!=0 and hashNum2!=0 union all
+			select hashNum3 from review1 where email=#{email} and movNum!=0 and hashNum3!=0)
+	</select>
+	
+	<!-- 마이페이지 TV 태그 갯수 -->
+	<select id="countTv" parameterType="string" resultType="int">
+		select count(*) from
+			(select hashNum1 from review1 where email=#{email} and tvNum!=0 and hashNum1!=0 union all
+			select hashNum2 from review1 where email=#{email} and tvNum!=0 and hashNum2!=0 union all
+			select hashNum3 from review1 where email=#{email} and tvNum!=0 and hashNum3!=0)
+	</select>
+	
+	<select id="preReviewCount" resultType="int" parameterType="string"> 
+		select count(*) from review1 where email=#{email} 
+	</select>
+	
+	<select id="preGenre" parameterType="string" resultMap="reviewResult">
+		select movGenre1 movGenre1, count(*) from
+			(select movGenre1 from
+				(select movGenre1 from review1 r, movie1 m
+				where email=#{email} and r.movNum=m.movNum)
+				union all select movGenre2 from
+				(select movGenre2 from review1 r, movie1 m
+				where email=#{email} and r.movNum=m.movNum and movGenre2 is not null))
+		group by movGenre1 order by count(*) desc 
+	</select>
+	
+	<select id="everRateMovie" parameterType="review" resultMap="reviewResult">
+		select reviewRate from review1 where movNum=#{movNum}
+	</select>
+	
+	<select id="everRateCountMovie" parameterType="int" resultType="int">
+		select count(*) from (select reviewRate from review1 where movNum=#{movNum})
+	</select>
+	
+	<select id="everRateTv" parameterType="review" resultMap="reviewResult">
+		select reviewRate from review1 where tvNum=#{tvNum}
+	</select>
+	
+	<select id="everRateCountTv" parameterType="int" resultType="int">
+		select count(*) from (select reviewRate from review1 where tvNum=#{tvNum})
+	</select>
+	
+	<!-- 리뷰분석페이지 별점평균 -->
+	<select id="rateAvg" parameterType="string" resultType="double">
+		select round(avg(reviewRate),1)/2 from review1 where email=#{email} and reviewRate > 0
+	</select>
+	
+	<!-- 리뷰분석페이지 별점 총 개수 -->
+	<select id="rateCnt" parameterType="string" resultType="int">
+		select count(reviewRate) from review1 where email=#{email} and reviewRate > 0
+	</select>
+	
+	<!-- 리뷰분석페이지 가장 많이 준 별점 -->
+	<select id="mostRating" parameterType="string" resultType="double">
+		select reviewRate/2 from(
+			select reviewRate,count(reviewRate) cnt from review1
+			where email=#{email} and reviewRate > 0 
+			group by reviewRate order by cnt desc) a
+			where rownum=1
+	</select>
+</mapper>

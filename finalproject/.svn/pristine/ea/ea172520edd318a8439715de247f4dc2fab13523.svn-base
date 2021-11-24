@@ -1,0 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<div class="footer-copyright text-center py-3">
+		© 지금까지 ${count}개의 해시태그가 쌓였어요
+		<div>
+			사업자등록번호 (123-45-67890) (주)해시 고객센터 : cs@hash.tag
+		</div>
+	</div>
+</body>
+</html>

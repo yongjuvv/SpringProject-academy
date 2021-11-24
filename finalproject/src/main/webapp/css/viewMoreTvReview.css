@@ -1,0 +1,420 @@
+div{
+	display: block;
+}
+.navTabManager_navContainer{
+	position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.TopNavTab{
+	position: fixed;
+    top: 0px;
+    left: 0;
+    z-index: 51;
+    background: transparent;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    height: 72px;
+    -webkit-transition: background-color 200ms;
+    transition: background-color 200ms;
+}
+.navTabManager_Main{
+	padding-top: 0px;
+    padding-bottom: 0;
+}
+.SectionWithShrinkHeaderBar{
+	padding: 96px 0 0;
+}
+.ShrinkHeaderBar{
+	font-size: 17px;
+    font-weight: 700;
+    top: 72px;
+    text-align: left;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    background: #fff;
+    box-sizing: border-box;
+    font-size: 17px;
+    font-weight: 700;
+    -webkit-letter-spacing: -0.1px;
+    -moz-letter-spacing: -0.1px;
+    -ms-letter-spacing: -0.1px;
+    letter-spacing: -0.1px;
+    line-height: 22px;
+    width: 100%;
+    height: 44px;
+    padding: 0 16px;
+    border-bottom: 1px solid #e3e3e3;
+}
+.ShrinkHeaderBar_Button{
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: space-between;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: space-between;
+    justify-content: space-between;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 22px;
+    text-align: left;
+}
+.ShrinkHeaderBar_LeftButton{
+	font-size: 17px;
+    font-weight: 700;
+    -webkit-letter-spacing: -0.5px;
+    -moz-letter-spacing: -0.5px;
+    -ms-letter-spacing: -0.5px;
+    letter-spacing: -0.5px;
+    line-height: 22px;
+}
+.HeaderBackButton_TopLeftButton{
+	width: 24px;
+    height: 24px;
+    margin: 10px 0;
+    background: none;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: normal;
+    -webkit-appearance: button;
+    text-transform: none;
+    overflow: visible;
+    font-size: 100%;
+}
+.ShrinkHeaderBar_LargeTitleBlock{
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 52px;
+    margin: 0 4px;
+    opacity: 1;
+    -webkit-transition: 150ms ease;
+    transition: 150ms ease;
+}
+.ShrinkHeaderBar_LargeTitle{
+	font-size: 33px;
+    font-weight: 700;
+    -webkit-letter-spacing: -1.2px;
+    -moz-letter-spacing: -1.2px;
+    -ms-letter-spacing: -1.2px;
+    letter-spacing: -1.2px;
+    line-height: 40px;
+    display: inline-block;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ShrinkHeaderBar_SmallTitle{
+	font-size: 17px;
+    font-weight: 700;
+    -webkit-letter-spacing: -0.5px;
+    -moz-letter-spacing: -0.5px;
+    -ms-letter-spacing: -0.5px;
+    letter-spacing: -0.5px;
+    line-height: 22px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    white-space: nowrap;
+    text-align: center;
+    margin: 11px 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0;
+    -webkit-transition: 300ms ease;
+    transition: 300ms ease;
+}
+.Row{
+	margin: 0 20px;
+}
+.ContentCommentsPage_CommentList{
+	max-width: 640px;
+    margin: 20px auto;
+}
+.VisualUl{
+	list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+.BasicCommentItem_Comment{
+	background-color: #f2f2f2;
+    box-sizing: border-box;
+    padding: 0 12px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 0 0 20px;
+}
+.BasicCommentItem_TitleContainer{
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    border-bottom: 1px solid #e5e5e5;
+    overflow: hidden;
+}
+.BasicCommentItem_ProfileBlock{
+	font-size: 17px;
+    font-weight: 400;
+    -webkit-letter-spacing: -0.7px;
+    -moz-letter-spacing: -0.7px;
+    -ms-letter-spacing: -0.7px;
+    letter-spacing: -0.7px;
+    line-height: 22px;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    overflow: hidden;
+}
+.ProfileBlockA{
+	color: #000;
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #000;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 400;
+    -webkit-letter-spacing: -0.7px;
+    -moz-letter-spacing: -0.7px;
+    -ms-letter-spacing: -0.7px;
+    letter-spacing: -0.7px;
+    line-height: 22px;
+}
+.ProfilePhoto_RoundedImageBlock{
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    overflow: hidden;
+    width: 32px;
+    height: 32px;
+    -webkit-flex-shrink: 0;
+    -ms-flex-shrink: 0;
+    flex-shrink: 0;
+    margin: 11px 8px 11px 0;
+    border: solid 1px rgba(0,0,0,0.08);
+    border-radius: 50%;
+    color: #000;
+}
+.ProfilePhoto_ProfilePhotoImg{
+	position: relative;
+    z-index: 1;
+    background: url(https://d19zyxn02q3dj8.cloudfront.net/user/605700/small/73c2c33….png) no-repeat center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+.ProfilePhoto_ProfilePhotoDefault{
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #f8f8f8;
+    width: 100%;
+    height: 100%;
+}
+.defaultImage_ProfileImage{
+	vertical-align: top;
+	width: 24px;
+    height: 24px;
+    border-style: none;
+}
+.UserName{
+	width: 140px;
+	font-size: 17px;
+    font-weight: 400;
+    -webkit-letter-spacing: -0.7px;
+    -moz-letter-spacing: -0.7px;
+    -ms-letter-spacing: -0.7px;
+    letter-spacing: -0.7px;
+    line-height: 22px;
+    color: #1f1f1f;
+    margin-bottom: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.BasicCommentItem_UserActionContainer{
+	font-size: 14px;
+    font-weight: 400;
+    -webkit-letter-spacing: -0.3px;
+    -moz-letter-spacing: -0.3px;
+    -ms-letter-spacing: -0.3px;
+    letter-spacing: -0.3px;
+    line-height: 19px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #fff;
+    color: #4a4a4a;
+    box-sizing: border-box;
+    min-width: 55px;
+    height: 26px;
+    padding: 0 8px;
+    border: 1px solid #eaeaea;
+    border-radius: 13px;
+    margin: 15px 0 0 16px;
+}
+.userStar{
+	vertical-align: top;
+    margin: 0 3px 0 0;
+    border-style: none;
+}
+.BasicCommentItem_TextBlock{
+	margin: 12px 0 15px;
+    height: auto;
+    position: relative;
+}
+.CommentItem_Text{
+	white-space: pre-wrap;
+    font-size: 15px;
+    font-weight: 400;
+    -webkit-letter-spacing: -0.2px;
+    -moz-letter-spacing: -0.2px;
+    -ms-letter-spacing: -0.2px;
+    letter-spacing: -0.2px;
+    line-height: 24px;
+    opacity: 1;
+    -webkit-transition: opacity 300ms;
+    transition: opacity 300ms;
+}
+.CommentItem_LikeReplyBlock{
+	font-size: 14px;
+    font-weight: 400;
+    -webkit-letter-spacing: -0.3px;
+    -moz-letter-spacing: -0.3px;
+    -ms-letter-spacing: -0.3px;
+    letter-spacing: -0.3px;
+    line-height: 19px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #787878;
+    height: 44px;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    overflow: hidden;
+}
+.CommentItem_LikeImage{
+	margin: 0 3px;
+	display: inline-block;
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd…QgMi40NCAwIDAgMC0uNTc0LTEuODk3Ii8+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K) no-repeat center;
+    background-size: contain;
+    width: 18px;
+    height: 18px;
+    letter-spacing: -0.3px;
+    line-height: 19px;
+    color: #787878;
+}
+.CommentItem_ReplyImage{
+	margin: 0 3px 0 13px;
+	display: inline-block;
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd…00LjAzIDcuNS05IDcuNS0uNzM5IDAtMS40NTYtLjA3NC0yLjE0My0uMjE0eiIvPgo8L3N2Zz4K) no-repeat center;
+    background-size: contain;
+    width: 18px;
+    height: 18px;
+    color: #787878;
+}
+em {
+    font-style: normal;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.CommentItem_UserActionBlock{
+	font-size: 17px;
+    font-weight: 400;
+    -webkit-letter-spacing: -0.7px;
+    -moz-letter-spacing: -0.7px;
+    -ms-letter-spacing: -0.7px;
+    letter-spacing: -0.7px;
+    line-height: 22px;
+    padding: 9.5px 0;
+    margin: 0 -4px;
+}
+.likebtn {
+	background: none;
+	border: none;
+	outline: 0;
+}
+
+.like {
+	color: #BD24A9;
+	background: none;
+	padding: 2px 8px;
+	font-size: 17px;
+}
+
+.clickLike {
+	color: white;
+	background-color: #BD24A9;
+	border-radius: 3px;
+}
